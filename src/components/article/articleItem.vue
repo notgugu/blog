@@ -44,11 +44,7 @@ export default {
       default: () => {}
     }
   },
-  methods: {
-    gotoArticle (id) {
-      console.log(id)
-    }
-  }
+  methods: {}
 }
 </script>
 

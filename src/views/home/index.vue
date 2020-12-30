@@ -184,9 +184,6 @@ export default {
       } else if (event.target.id === 'weChat') {
         this.isShowWechatCode = 0
       }
-    },
-    gotoArticle (id) {
-      console.log(id)
     }
   },
   mounted () {
