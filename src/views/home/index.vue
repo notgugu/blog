@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 15:39:17
+ * @LastEditTime: 2020-12-30 16:37:44
 -->
 <template>
   <div class="home">
@@ -20,6 +20,7 @@
           <template v-slot:content>
             <div class="card-content">
               <p>网名：凡</p>
+              <p>签名：天行健，君子以自强不息</p>
               <p>职业：前端开发工程师</p>
               <p>现居：浙江杭州</p>
               <p>QQ：534957983</p>
