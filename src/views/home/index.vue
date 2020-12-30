@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 14:24:05
+ * @LastEditTime: 2020-12-30 15:39:17
 -->
 <template>
   <div class="home">
@@ -14,7 +14,7 @@
       </div>
       <div class="content-explain">
         <card
-          :className="'iconfont icon-card'"
+          :icon="'#icon-card'"
           :title="'我的名片'"
         >
           <template v-slot:content>
@@ -69,6 +69,22 @@
             </div>
           </template>
         </card>
+        <card
+          :icon="'#icon-fire'"
+          :title="'最热文章'"
+        >
+          <template v-slot:content>
+            <div
+              class="hot-article"
+              v-for="(item, index) in hotArticleListData"
+              :key="item.id"
+              v-gotoArticle="item.id"
+            >
+              <i>{{index + 1}}</i>
+              <span>{{item.title}}</span>
+            </div>
+          </template>
+        </card>
       </div>
     </div>
   </div>
@@ -88,7 +104,7 @@ export default {
           author: 'mxk',
           createTime: '2020-11-12 11:12:24',
           category: '随笔',
-          introduce: '1111111111111111',
+          introduce: '实现了一个实时搜索类的函数节流,通过vue自定义指令v-debounce实现.原本,如果我们想做一个实施搜索,那么会直接用@keyup=search,这样就会非常耗性能,键盘敲一下,就会调用一次search事件,如果是ajax请求,那么会非常不友好,所以通过v-debounce,则可以在键盘连续敲击的时候组织运行,停留300毫秒才执行',
           readCount: '1200',
           messageCount: '123',
           like: '111',
@@ -99,12 +115,54 @@ export default {
           title: '马显快测试测试2',
           author: 'mxk',
           createTime: '2020-11-12 11:22:33',
-          category: '随笔',
+          category: '技术',
           introduce: '222222222222222222222',
           readCount: '13200',
           messageCount: '322',
           like: '222',
           tags: ['javascript', 'vue']
+        }
+      ],
+      hotArticleListData: [
+        {
+          id: '1',
+          title: '从萨达萨达萨达萨达'
+        },
+        {
+          id: '2',
+          title: '看见撒旦年卡沉思u阿萨'
+        },
+        {
+          id: '3',
+          title: 'aasdkaskmdas'
+        },
+        {
+          id: '4',
+          title: '爱看书的喇嘛卡了'
+        },
+        {
+          id: '5',
+          title: '从萨达萨达萨达萨达'
+        },
+        {
+          id: '6',
+          title: '看见撒旦年卡沉思u阿萨'
+        },
+        {
+          id: '7',
+          title: 'aasdkaskmdas'
+        },
+        {
+          id: '8',
+          title: '爱看书的喇嘛卡了'
+        },
+        {
+          id: '9',
+          title: '看见撒旦年卡沉思u阿萨'
+        },
+        {
+          id: '10',
+          title: 'aasdkaskmdas'
         }
       ],
       isShowQQCode: 0,
@@ -125,6 +183,9 @@ export default {
       } else if (event.target.id === 'weChat') {
         this.isShowWechatCode = 0
       }
+    },
+    gotoArticle (id) {
+      console.log(id)
     }
   },
   mounted () {

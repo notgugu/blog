@@ -4,11 +4,13 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 14:29:45
+ * @LastEditTime: 2020-12-30 15:42:29
 -->
 <template>
   <div class="item">
-    <h2 @click="gotoArticle(article.id)">{{article.title}}</h2>
+    <h2
+      v-gotoArticle="article.id"
+    >{{article.title}}</h2>
     <div class="message">
       <span><i class="iconfont icon-geren"></i>作者：{{article.author}}</span>
       <span><i class="iconfont icon-biaoqing9"></i>发表于：{{article.createTime}}</span>
@@ -79,6 +81,15 @@ export default {
   }
   .introduce {
     margin-bottom: 10px;
+    line-height: 30px;
+    font-size: 16px;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   .tags {
     display: flex;
