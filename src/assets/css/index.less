@@ -1,7 +1,13 @@
 .main {
+  height: 100%;
   .main-header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     height: 60px;
     border-bottom: 1px solid #e6e6e6;
+    background-color: #fff;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .header {
       margin: 0 auto;
@@ -36,7 +42,7 @@
           align-items: center;
           cursor: pointer;
           i {
-            font-size: 22px;
+            font-size: 30px;
           }
         }
         .active {
@@ -44,5 +50,10 @@
         }
       }
     }
+  }
+  .main-content {
+    margin: 60px auto 0 auto;
+    width: 70%;
+    height: auto;
   }
 }

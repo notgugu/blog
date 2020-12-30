@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3176645",
+      "name": "GitHub",
+      "font_class": "GitHub",
+      "unicode": "ea0a",
+      "unicode_decimal": 59914
+    },
+    {
       "icon_id": "5876380",
       "name": "表情",
       "font_class": "biaoqing",
@@ -88,6 +95,48 @@
       "font_class": "geren",
       "unicode": "e668",
       "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "18869231",
+      "name": "card",
+      "font_class": "card",
+      "unicode": "e83b",
+      "unicode_decimal": 59451
+    },
+    {
+      "icon_id": "19036525",
+      "name": "fire",
+      "font_class": "fire",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "19036550",
+      "name": "external_qq",
+      "font_class": "external_qq",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "19036555",
+      "name": "external_wechat",
+      "font_class": "external_wechat",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "19036556",
+      "name": "praise_2",
+      "font_class": "praise_2",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "19036559",
+      "name": "praise_1",
+      "font_class": "praise_1",
+      "unicode": "e611",
+      "unicode_decimal": 58897
     }
   ]
 }

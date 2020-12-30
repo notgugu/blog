@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 15:09:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 09:21:13
+ * @LastEditTime: 2020-12-30 10:23:29
 -->
 <template>
   <div class="main">
@@ -28,10 +28,12 @@
         </div>
       </div>
     </div>
-    <keep-alive v-if="this.$route.meta.isKeepAlive">
-      <router-view/>
-    </keep-alive>
-    <router-view v-else/>
+    <div class="main-content">
+      <keep-alive v-if="this.$route.meta.isKeepAlive">
+        <router-view/>
+      </keep-alive>
+      <router-view v-else/>
+    </div>
   </div>
 </template>
 
@@ -56,6 +58,11 @@ export default {
           title: '文章',
           icon: 'iconfont icon-biaoqing8',
           path: '/article'
+        },
+        {
+          title: '留言',
+          icon: 'iconfont icon-biaoqing5',
+          path: '/message'
         },
         {
           title: '我的',
@@ -90,5 +97,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../assets/css/index/index.less';
+@import '../assets/css/index.less';
 </style>

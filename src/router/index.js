@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 09:09:06
+ * @LastEditTime: 2020-12-30 10:22:42
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -12,6 +12,7 @@ import index from '@/views'
 import home from '@/views/home'
 import category from '@/views/category'
 import article from '@/views/article'
+import message from '@/views/message'
 import mine from '@/views/mine'
 
 Vue.use(Router)
@@ -49,6 +50,15 @@ export default new Router({
           component: article,
           meta: {
             title: '文章',
+            isKeepAlive: false
+          }
+        },
+        {
+          path: '/message',
+          name: 'message',
+          component: message,
+          meta: {
+            title: '留言',
             isKeepAlive: false
           }
         },
