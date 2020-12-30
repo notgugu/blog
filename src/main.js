@@ -16,6 +16,7 @@ import '@/assets/iconfont/iconfont.css'
 import iconfont from '@/assets/iconfont/iconfont.js'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+import './mock/mock'
 
 Vue.prototype.$storage = storage
 Vue.config.productionTip = false
