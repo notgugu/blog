@@ -4,13 +4,16 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 16:37:44
+ * @LastEditTime: 2020-12-31 13:17:07
 -->
 <template>
   <div class="home">
     <div class="content">
       <div class="content-article">
-        <article-list :articleList="articleListData"></article-list>
+        <article-list :articleList="articleListData"
+        :nomore="nomore"
+        @loading="loading"
+        ></article-list>
       </div>
       <div class="content-explain">
         <card
@@ -88,12 +91,15 @@
         </card>
       </div>
     </div>
+    <go-top></go-top>
   </div>
 </template>
 
 <script>
 import articleList from '@/components/article/articleList'
 import card from '@/components/card/card'
+import goTop from '@/components/goTop/goTop'
+import { getArticleList } from '@/api/home'
 export default {
   name: 'home',
   data () {
@@ -166,11 +172,40 @@ export default {
           title: 'aasdkaskmdas'
         }
       ],
+      page: 1,
+      num: 10,
+      total: 0,
       isShowQQCode: 0,
       isShowWechatCode: 0
     }
   },
+  created () {
+    this.getArticleList()
+  },
+  computed: {
+    nomore () {
+      return this.articleListData.length >= this.total
+    }
+  },
   methods: {
+    loading () {
+      this.page++
+      this.getArticleList()
+    },
+    getArticleList () {
+      let params = {
+        page: this.page,
+        num: this.num
+      }
+      getArticleList(params)
+        .then(res => {
+          this.articleListData = this.articleListData.concat(res.data)
+          this.total = res.total
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     showQrCode (event) {
       if (event.target.id === 'qq') {
         this.isShowQQCode = 1
@@ -194,7 +229,8 @@ export default {
   },
   components: {
     articleList,
-    card
+    card,
+    goTop
   }
 }
 </script>

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 15:09:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 10:23:29
+ * @LastEditTime: 2020-12-31 13:40:07
 -->
 <template>
   <div class="main">
@@ -29,10 +29,10 @@
       </div>
     </div>
     <div class="main-content">
-      <keep-alive v-if="this.$route.meta.isKeepAlive">
-        <router-view/>
+      <keep-alive>
+        <router-view v-if="this.$route.meta.isKeepAlive"/>
       </keep-alive>
-      <router-view v-else/>
+      <router-view v-if="!this.$route.meta.isKeepAlive"/>
     </div>
   </div>
 </template>
@@ -73,10 +73,13 @@ export default {
     }
   },
   created () {},
+  watch: {
+    '$route' (newval) {
+      this.active = this.$storage.getSessionStorage('active') || 0
+    }
+  },
   methods: {
     gotoOtherView (item, index) {
-      this.active = index
-      this.$storage.setSessionStorage('active', index)
       this.jump(item.path)
     },
     jump (path) {

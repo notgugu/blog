@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 15:53:58
+ * @LastEditTime: 2020-12-31 13:32:23
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -26,11 +26,9 @@ Vue.directive('gotoArticle', {
     let nowTime = new Date()
     el.addEventListener('click', () => {
       if (new Date() - nowTime > 1000) {
-        setTimeout(() => {
-          console.log(el)
-          console.log(binding)
-          console.log(vnode)
-        }, 200)
+        console.log(el)
+        console.log(binding)
+        console.log(vnode)
       }
       nowTime = new Date()
     })
@@ -39,11 +37,12 @@ Vue.directive('gotoArticle', {
 
 router.beforeEach((to, from, next) => {
   nprogress.start()
+  storage.setSessionStorage('active', to.meta.index)
   document.title = to.meta.title
   next()
 })
 
-router.afterEach(() => {
+router.afterEach((to) => {
   nprogress.done()
 })
 

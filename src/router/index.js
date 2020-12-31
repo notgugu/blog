@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 10:22:42
+ * @LastEditTime: 2020-12-31 13:42:36
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -32,7 +32,8 @@ export default new Router({
           component: home,
           meta: {
             title: '首页',
-            isKeepAlive: true
+            isKeepAlive: true,
+            index: 0
           }
         },
         {
@@ -41,7 +42,8 @@ export default new Router({
           component: category,
           meta: {
             title: '分类',
-            isKeepAlive: false
+            isKeepAlive: false,
+            index: 1
           }
         },
         {
@@ -50,7 +52,8 @@ export default new Router({
           component: article,
           meta: {
             title: '文章',
-            isKeepAlive: false
+            isKeepAlive: false,
+            index: 2
           }
         },
         {
@@ -59,7 +62,8 @@ export default new Router({
           component: message,
           meta: {
             title: '留言',
-            isKeepAlive: false
+            isKeepAlive: false,
+            index: 3
           }
         },
         {
@@ -68,10 +72,18 @@ export default new Router({
           component: mine,
           meta: {
             title: '我的',
-            isKeepAlive: false
+            isKeepAlive: false,
+            index: 4
           }
         }
       ]
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })
