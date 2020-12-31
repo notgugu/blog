@@ -4,5 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-30 16:11:08
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 16:11:08
+ * @LastEditTime: 2020-12-31 16:26:40
  */
+var mysql = require('mysql')
+console.log(mysql)
