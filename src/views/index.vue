@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 15:09:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 13:40:07
+ * @LastEditTime: 2020-12-31 14:05:51
 -->
 <template>
   <div class="main">
@@ -55,9 +55,9 @@ export default {
           path: '/category'
         },
         {
-          title: '文章',
+          title: '归档',
           icon: 'iconfont icon-biaoqing8',
-          path: '/article'
+          path: '/pigeonhole'
         },
         {
           title: '留言',

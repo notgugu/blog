@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "highlight.js": "^10.5.0",
     "nprogress": "^0.2.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "wangeditor": "^4.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

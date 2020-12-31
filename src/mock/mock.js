@@ -4,13 +4,14 @@
  * @Author: mxk
  * @Date: 2020-12-31 08:56:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 10:57:00
+ * @LastEditTime: 2020-12-31 14:52:57
  */
 const mock = require('mockjs')
 const random = mock.Random
 const api = {
   getArticleList: '/getArticleList'
 }
+const category = ['前端', '随笔', '生活', '算法']
 mock.mock(RegExp(api.getArticleList + '.*'), 'get', (option) => {
   let params = getParams(option.url, api.getArticleList)
   let data = []
@@ -21,7 +22,7 @@ mock.mock(RegExp(api.getArticleList + '.*'), 'get', (option) => {
       title: random.ctitle(15),
       author: 'mxk',
       createTime: random.date('yyyy-mm-dd hh:mm:ss'),
-      category: random.cword(2),
+      category: category[random.natural(0, 3)],
       introduce: random.csentence(30, 100),
       readCount: random.natural(300, 1000),
       messageCount: random.natural(0, 100),

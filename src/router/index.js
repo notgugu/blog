@@ -4,16 +4,18 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 13:42:36
+ * @LastEditTime: 2020-12-31 15:17:59
  */
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/views'
 import home from '@/views/home'
 import category from '@/views/category'
-import article from '@/views/article'
+import pigeonhole from '@/views/pigeonhole'
 import message from '@/views/message'
 import mine from '@/views/mine'
+import production from '@/views/production'
+import write from '@/views/write'
 
 Vue.use(Router)
 
@@ -31,7 +33,6 @@ export default new Router({
           name: 'home',
           component: home,
           meta: {
-            title: '首页',
             isKeepAlive: true,
             index: 0
           }
@@ -41,17 +42,15 @@ export default new Router({
           name: 'category',
           component: category,
           meta: {
-            title: '分类',
             isKeepAlive: false,
             index: 1
           }
         },
         {
-          path: '/article',
-          name: 'article',
-          component: article,
+          path: '/pigeonhole',
+          name: 'pigeonhole',
+          component: pigeonhole,
           meta: {
-            title: '文章',
             isKeepAlive: false,
             index: 2
           }
@@ -61,7 +60,6 @@ export default new Router({
           name: 'message',
           component: message,
           meta: {
-            title: '留言',
             isKeepAlive: false,
             index: 3
           }
@@ -71,12 +69,27 @@ export default new Router({
           name: 'mine',
           component: mine,
           meta: {
-            title: '我的',
             isKeepAlive: false,
             index: 4
           }
+        },
+        {
+          path: '/article/:id',
+          name: 'article',
+          component: production,
+          meta: {
+            isKeepAlive: false
+          }
         }
       ]
+    },
+    {
+      path: '/write',
+      name: 'write',
+      component: write,
+      meta: {
+        isKeepAlive: true
+      }
     }
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 13:32:23
+ * @LastEditTime: 2020-12-31 15:41:10
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -16,19 +16,17 @@ import '@/assets/iconfont/iconfont.css'
 import iconfont from '@/assets/iconfont/iconfont.js'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import './mock/mock'
+// import './mock/mock'
 
 Vue.prototype.$storage = storage
 Vue.config.productionTip = false
 
 Vue.directive('gotoArticle', {
-  inserted (el, binding, vnode) {
+  inserted (el, binding) {
     let nowTime = new Date()
     el.addEventListener('click', () => {
       if (new Date() - nowTime > 1000) {
-        console.log(el)
-        console.log(binding)
-        console.log(vnode)
+        router.push('/article/' + binding.value)
       }
       nowTime = new Date()
     })
@@ -37,8 +35,9 @@ Vue.directive('gotoArticle', {
 
 router.beforeEach((to, from, next) => {
   nprogress.start()
-  storage.setSessionStorage('active', to.meta.index)
-  document.title = to.meta.title
+  if (to.meta.index !== null) {
+    storage.setSessionStorage('active', to.meta.index)
+  }
   next()
 })
 

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 13:17:07
+ * @LastEditTime: 2020-12-31 15:37:26
 -->
 <template>
   <div class="home">
@@ -180,7 +180,7 @@ export default {
     }
   },
   created () {
-    this.getArticleList()
+    // this.getArticleList()
   },
   computed: {
     nomore () {

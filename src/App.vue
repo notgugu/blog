@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 09:44:36
+ * @LastEditTime: 2020-12-31 14:12:19
 -->
 <template>
   <div id="app">
@@ -16,6 +16,7 @@
 export default {
   name: 'App',
   created () {
+    document.title = '凡 天行健，君子以自强不息'
     setTimeout(() => {
       window.L2Dwidget.init({
         pluginRootPath: '../static/live2dw/',
