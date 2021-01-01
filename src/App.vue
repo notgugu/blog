@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 14:12:19
+ * @LastEditTime: 2021-01-01 15:12:43
 -->
 <template>
   <div id="app">
@@ -27,7 +27,7 @@ export default {
         model: {
           jsonPath: '../static/live2dw/live2d-widget-model-haru_2/assets/haru02.model.json'
         },
-        display: { position: 'right', width: 180, height: 400 },
+        display: { position: 'left', width: 180, height: 400 },
         mobile: { show: true },
         log: false
       })

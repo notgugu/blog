@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 15:37:26
+ * @LastEditTime: 2021-01-01 15:57:33
 -->
 <template>
   <div class="home">
@@ -104,32 +104,7 @@ export default {
   name: 'home',
   data () {
     return {
-      articleListData: [
-        {
-          id: '1',
-          title: '马显快测试测试1',
-          author: 'mxk',
-          createTime: '2020-11-12 11:12:24',
-          category: '随笔',
-          introduce: '实现了一个实时搜索类的函数节流,通过vue自定义指令v-debounce实现.原本,如果我们想做一个实施搜索,那么会直接用@keyup=search,这样就会非常耗性能,键盘敲一下,就会调用一次search事件,如果是ajax请求,那么会非常不友好,所以通过v-debounce,则可以在键盘连续敲击的时候组织运行,停留300毫秒才执行',
-          readCount: '1200',
-          messageCount: '123',
-          like: '111',
-          tags: ['html', 'css']
-        },
-        {
-          id: '2',
-          title: '马显快测试测试2',
-          author: 'mxk',
-          createTime: '2020-11-12 11:22:33',
-          category: '技术',
-          introduce: '222222222222222222222',
-          readCount: '13200',
-          messageCount: '322',
-          like: '222',
-          tags: ['javascript', 'vue']
-        }
-      ],
+      articleListData: [],
       hotArticleListData: [
         {
           id: '1',
@@ -180,7 +155,7 @@ export default {
     }
   },
   created () {
-    // this.getArticleList()
+    this.getArticleList()
   },
   computed: {
     nomore () {

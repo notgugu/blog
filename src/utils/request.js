@@ -4,20 +4,26 @@
  * @Author: mxk
  * @Date: 2020-12-31 08:56:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 13:11:26
+ * @LastEditTime: 2021-01-01 21:52:17
  */
 import axios from 'axios'
+import storage from './storage'
+axios.defaults.baseURL = 'http://localhost:3000'
 axios.interceptors.request.use((config) => {
+  let token = storage.getLocalStorage('token') || ''
+  if (token) {
+    config.headers.token = token
+  }
   return config
 }, (error) => {
   console.log(error)
 })
 axios.interceptors.response.use((response) => {
-  console.log(response)
-  if (response.status === 200 || response.status === '200') {
-    return response.data
+  let data = response.data
+  if (data.code === 200 || data.code === '200') {
+    return data.data
   } else {
-    return Promise.reject(response)
+    return Promise.reject(data)
   }
 }, (err) => {
   return Promise.reject(err)

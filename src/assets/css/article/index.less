@@ -1,7 +1,27 @@
 .article {
-  width: 100%;
-  margin-top: 80px;
+  width: 80%;
+  margin: 80px auto 0 auto;
   padding: 30px;
   border: 1px solid #eee;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  user-select: text;
+  .title {
+    text-align: center;
+  }
+  .detail {
+    text-align: center;
+    margin-top: 20px;
+    .message {
+      margin-bottom: 10px;
+      span {
+        line-height: 20px;
+        color: #999;
+        word-break: keep-all;
+        white-space: nowrap;
+      }
+    }
+  }
+  .content {
+    margin-top: 20px;
+  }
 }

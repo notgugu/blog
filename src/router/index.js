@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 15:17:59
+ * @LastEditTime: 2021-01-01 21:39:15
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -14,8 +14,10 @@ import category from '@/views/category'
 import pigeonhole from '@/views/pigeonhole'
 import message from '@/views/message'
 import mine from '@/views/mine'
+import login from '@/views/login'
+import admin from '@/views/admin'
 import production from '@/views/production'
-import write from '@/views/write'
+import write from '@/views/admin/write'
 
 Vue.use(Router)
 
@@ -84,12 +86,33 @@ export default new Router({
       ]
     },
     {
-      path: '/write',
-      name: 'write',
-      component: write,
+      path: '/login',
+      name: 'login',
+      component: login,
       meta: {
-        isKeepAlive: true
+        isKeepAlive: false
       }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: admin,
+      redirect: '/admin/write',
+      meta: {
+        isKeepAlive: false,
+        isNeedLogin: true
+      },
+      children: [
+        {
+          path: 'write',
+          name: 'write',
+          component: write,
+          meta: {
+            isKeepAlive: true,
+            isNeedLogin: true
+          }
+        }
+      ]
     }
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "highlight.js": "^10.5.0",
     "nprogress": "^0.2.0",
+    "qs": "^6.9.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "wangeditor": "^4.6.0"

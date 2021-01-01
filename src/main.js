@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 15:41:10
+ * @LastEditTime: 2021-01-01 22:19:51
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -35,6 +35,9 @@ Vue.directive('gotoArticle', {
 
 router.beforeEach((to, from, next) => {
   nprogress.start()
+  if (to.meta.isNeedLogin && !storage.getLocalStorage('token')) {
+    router.push('/login')
+  }
   if (to.meta.index !== null) {
     storage.setSessionStorage('active', to.meta.index)
   }

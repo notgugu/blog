@@ -2,9 +2,9 @@
  * @Description: ...
  * @Version: 1.0
  * @Author: mxk
- * @Date: 2020-12-29 15:09:17
+ * @Date: 2021-01-01 20:14:44
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 20:07:59
+ * @LastEditTime: 2021-01-01 20:20:41
 -->
 <template>
   <div class="main">
@@ -42,32 +42,12 @@ export default {
   name: 'index',
   data () {
     return {
-      active: this.$storage.getSessionStorage('active') || 0,
+      active: this.$storage.getSessionStorage('activeAdmin') || 0,
       navData: [
         {
-          title: '首页',
+          title: '写作',
           icon: 'iconfont icon-biaoqing6',
-          path: '/home'
-        },
-        {
-          title: '分类',
-          icon: 'iconfont icon-biaoqing2',
-          path: '/category'
-        },
-        {
-          title: '归档',
-          icon: 'iconfont icon-biaoqing8',
-          path: '/pigeonhole'
-        },
-        {
-          title: '留言',
-          icon: 'iconfont icon-biaoqing5',
-          path: '/message'
-        },
-        {
-          title: '我的',
-          icon: 'iconfont icon-biaoqing4',
-          path: '/mine'
+          path: '/admin/write'
         }
       ]
     }
@@ -75,7 +55,7 @@ export default {
   created () {},
   watch: {
     '$route' (newval) {
-      this.active = this.$storage.getSessionStorage('active') || 0
+      this.active = this.$storage.getSessionStorage('activeAdmin') || 0
     }
   },
   methods: {
@@ -92,7 +72,7 @@ export default {
         location.reload()
       }
       this.active = 0
-      this.$storage.setSessionStorage('active', this.active)
+      this.$storage.setSessionStorage('activeAdmin', this.active)
       this.$router.push('/')
     }
   }
@@ -100,5 +80,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../assets/css/index.less';
+@import '../../assets/css/index.less';
 </style>
