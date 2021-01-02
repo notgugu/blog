@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 21:39:15
+ * @LastEditTime: 2021-01-02 18:20:07
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -36,7 +36,7 @@ export default new Router({
           component: home,
           meta: {
             isKeepAlive: true,
-            index: 0
+            index: '0'
           }
         },
         {
@@ -45,7 +45,7 @@ export default new Router({
           component: category,
           meta: {
             isKeepAlive: false,
-            index: 1
+            index: '1'
           }
         },
         {
@@ -54,7 +54,7 @@ export default new Router({
           component: pigeonhole,
           meta: {
             isKeepAlive: false,
-            index: 2
+            index: '2'
           }
         },
         {
@@ -63,7 +63,7 @@ export default new Router({
           component: message,
           meta: {
             isKeepAlive: false,
-            index: 3
+            index: '3'
           }
         },
         {
@@ -72,7 +72,7 @@ export default new Router({
           component: mine,
           meta: {
             isKeepAlive: false,
-            index: 4
+            index: '4'
           }
         },
         {
@@ -109,7 +109,8 @@ export default new Router({
           component: write,
           meta: {
             isKeepAlive: true,
-            isNeedLogin: true
+            isNeedLogin: true,
+            index: '0'
           }
         }
       ]

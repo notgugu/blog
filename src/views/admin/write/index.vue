@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 14:08:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 22:46:00
+ * @LastEditTime: 2021-01-02 15:07:35
 -->
 <template>
   <div class="write">
@@ -61,10 +61,17 @@ export default {
         tags,
         content
       }
-      addArticle(data).then((res) => {
-        console.log(res)
-      }).catch((err) => {
-        console.log(err)
+      addArticle(data).then(() => {
+        this.$message({
+          type: 'success',
+          message: '提交成功'
+        })
+        location.reload()
+      }).catch(() => {
+        this.$message({
+          type: 'error',
+          message: '提交失败'
+        })
       })
     },
     getDetail () {
@@ -106,5 +113,11 @@ export default {
     justify-content: flex-end;
     margin-top: 30px;
   }
+}
+</style>
+
+<style scoped>
+.w-e-toolbar {
+  z-index: 1000;
 }
 </style>

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 12:50:49
+ * @LastEditTime: 2021-01-02 14:03:01
 -->
 <template>
   <div class="list">
@@ -36,6 +36,10 @@ export default {
     nomore: {
       type: Boolean,
       default: true
+    },
+    isLoading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -44,7 +48,6 @@ export default {
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
       if (clientHeight + scrollTop >= scrollHeight) {
-        console.log(111)
         this.$emit('loading')
       }
     }

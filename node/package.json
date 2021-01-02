@@ -4,7 +4,8 @@
   "description": "马显快个人博客node后台",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "debug": "nodemon debug index.js"
   },
   "author": "",
   "license": "ISC",

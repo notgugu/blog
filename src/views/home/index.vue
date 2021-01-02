@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 15:57:33
+ * @LastEditTime: 2021-01-02 15:18:14
 -->
 <template>
   <div class="home">
@@ -99,63 +99,24 @@
 import articleList from '@/components/article/articleList'
 import card from '@/components/card/card'
 import goTop from '@/components/goTop/goTop'
-import { getArticleList } from '@/api/home'
+import { getArticleList, getHotArticleList } from '@/api/home'
 export default {
   name: 'home',
   data () {
     return {
       articleListData: [],
-      hotArticleListData: [
-        {
-          id: '1',
-          title: '从萨达萨达萨达萨达'
-        },
-        {
-          id: '2',
-          title: '看见撒旦年卡沉思u阿萨'
-        },
-        {
-          id: '3',
-          title: 'aasdkaskmdas'
-        },
-        {
-          id: '4',
-          title: '爱看书的喇嘛卡了'
-        },
-        {
-          id: '5',
-          title: '从萨达萨达萨达萨达'
-        },
-        {
-          id: '6',
-          title: '看见撒旦年卡沉思u阿萨'
-        },
-        {
-          id: '7',
-          title: 'aasdkaskmdas'
-        },
-        {
-          id: '8',
-          title: '爱看书的喇嘛卡了'
-        },
-        {
-          id: '9',
-          title: '看见撒旦年卡沉思u阿萨'
-        },
-        {
-          id: '10',
-          title: 'aasdkaskmdas'
-        }
-      ],
+      hotArticleListData: [],
       page: 1,
       num: 10,
       total: 0,
+      isLoading: false,
       isShowQQCode: 0,
       isShowWechatCode: 0
     }
   },
   created () {
     this.getArticleList()
+    this.getHotArticleList()
   },
   computed: {
     nomore () {
@@ -165,9 +126,12 @@ export default {
   methods: {
     loading () {
       this.page++
-      this.getArticleList()
+      if (!this.isLoading) {
+        this.getArticleList()
+      }
     },
     getArticleList () {
+      this.isLoading = true
       let params = {
         page: this.page,
         num: this.num
@@ -176,10 +140,19 @@ export default {
         .then(res => {
           this.articleListData = this.articleListData.concat(res.data)
           this.total = res.total
+          this.isLoading = false
         })
         .catch(err => {
+          this.isLoading = false
           console.log(err)
         })
+    },
+    getHotArticleList () {
+      getHotArticleList().then(res => {
+        this.hotArticleListData = res
+      }).catch(err => {
+        console.log(err)
+      })
     },
     showQrCode (event) {
       if (event.target.id === 'qq') {

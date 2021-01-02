@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 11:04:29
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-31 13:53:40
+ * @LastEditTime: 2021-01-02 18:15:04
 -->
 <template>
   <div
@@ -28,6 +28,8 @@ export default {
       const scrollTop = document.documentElement.scrollTop
       if (scrollTop > 200) {
         this.isOnTop = false
+      } else {
+        this.isOnTop = true
       }
     },
     goTop () {

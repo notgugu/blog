@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-30 16:11:08
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 22:51:51
+ * @LastEditTime: 2021-01-02 18:13:11
  */
 const mysql = require('mysql')
 const http = require('http')
@@ -15,7 +15,7 @@ const jwt = require('jsonwebtoken')
 const app = express()
 const secret = 'mxk'
 let token = ''
-console.log(jwt)
+let isCheckLogin = false
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
@@ -37,20 +37,21 @@ let pool = mysql.createPool({
   database: 'blog'
 })
 
-// function checkIsLogin (req) {
-//   let headerToken = req.header.token
-//   if (token) {
-//     jwt.verify(headerToken, secret, (err, decode) => {
-//       if (err) {
-//         return false
-//       } else {
-//         return true
-//       }
-//     })
-//   } else {
-//     return true
-//   }
-// }
+function checkIsLogin (req) {
+  let headerToken = req.headers.token
+  if (headerToken) {
+    jwt.verify(headerToken, secret, (err, decode) => {
+      console.log(err, decode)
+      if (err) {
+        isCheckLogin = false
+      } else {
+        isCheckLogin = true
+      }
+    })
+  } else {
+    isCheckLogin = false
+  }
+}
 
 function mysqlQuery (sql, callback) {
   pool.getConnection((err, connection) => {
@@ -70,10 +71,10 @@ function mysqlQuery (sql, callback) {
 app.get('/getArticleList', (req, res) => {
   let page = req.query.page
   let num = req.query.num
-  let sql = `select * from articleList limit ${(page - 1) * num}, ${num}`
-  mysqlQuery(sql, (result, err) => {
+  let sql1 = `select * from articleList limit ${(page - 1) * num}, ${num}`
+  let sql2 = `select id from articleList`
+  mysqlQuery(sql1, (result, err) => {
     if (result) {
-      let total = result.length
       let data = result.map(item => {
         return {
           id: item.id,
@@ -84,16 +85,27 @@ app.get('/getArticleList', (req, res) => {
           introduce: item.introduce,
           readCount: item.readCount,
           messageCount: item.messageCount,
-          likeCount: item.likeCount,
           tags: item.tags && item.tags.split(',')
         }
       })
-      res.json({
-        code: 200,
-        msg: 'success',
-        data: {
-          total,
-          data
+      mysqlQuery(sql2, (result, err) => {
+        if (result) {
+          let total = result.length
+          res.json({
+            code: 200,
+            msg: 'success',
+            data: {
+              total,
+              data
+            }
+          })
+        } else {
+          console.log(err)
+          res.json({
+            code: 400,
+            msg: 'failed',
+            data: null
+          })
         }
       })
     } else {
@@ -101,6 +113,33 @@ app.get('/getArticleList', (req, res) => {
       res.json({
         code: 400,
         msg: 'failed',
+        data: null
+      })
+    }
+  })
+})
+
+app.get('/getHotArticleList', (req, res) => {
+  let sql = `select * from articleList`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      let data = result.sort((a, b) => {
+        return b.readCount - a.readCount
+      }).slice(0, 10).map(item => {
+        return {
+          id: item.id,
+          title: item.title
+        }
+      })
+      res.json({
+        code: 200,
+        msg: 'success',
+        data
+      })
+    } else {
+      res.json({
+        code: 400,
+        msg: err,
         data: null
       })
     }
@@ -131,13 +170,142 @@ app.get('/getArticle', (req, res) => {
   })
 })
 
-app.post('/addArticle', (req, res) => {
+app.get('/getArticleComment', (req, res) => {
+  let id = req.query.id
+  let sql = `select * from articleComment where id=${id}`
+  mysqlQuery(sql, (result, err) => {
+    console.log(result)
+    if (result && result.length > 0) {
+      let data = JSON.parse(result[0].content).commentList
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: {
+          data
+        }
+      })
+    } else {
+      if (err) {
+        console.log(err)
+        res.json({
+          code: 400,
+          msg: 'failed',
+          data: null
+        })
+      } else {
+        res.json({
+          code: 200,
+          msg: '暂无评论',
+          data: null
+        })
+      }
+    }
+  })
+})
+
+app.post('/addArticleComment', (req, res) => {
+  let {id, nickName, comment} = req.body
+  let createTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+  let sql = `select * from articleComment where id=${id}`
+  mysqlQuery(sql, (result, err) => {
+    if (result && result.length > 0) {
+      console.log(result)
+      let commentList = JSON.parse(result[0].content).commentList
+      commentList.push({
+        nickName,
+        comment,
+        createTime
+      })
+      let messageCount = commentList.length
+      commentList = JSON.stringify({commentList})
+      sql = `update articleComment set content='${commentList}' where id=${id}`
+      mysqlQuery(sql, (result, err) => {
+        if (result) {
+          sql = `update articleList set messageCount=${messageCount} where id=${id}`
+          mysqlQuery(sql, (result, err) => {
+            if (result) {
+              console.log(result)
+            } else {
+              console.log(err)
+            }
+          })
+          res.json({
+            code: 200,
+            msg: 'success',
+            data: null
+          })
+        } else {
+          console.log(err)
+          res.json({
+            code: 400,
+            msg: 'fail',
+            data: null
+          })
+        }
+      })
+    } else if (result) {
+      let commentList = []
+      commentList.push({
+        nickName,
+        createTime,
+        comment
+      })
+      let messageCount = commentList.length
+      commentList = JSON.stringify({
+        commentList
+      })
+      sql = `insert into articleComment values (${id},'${commentList}')`
+      mysqlQuery(sql, (result, err) => {
+        if (result) {
+          sql = `update articleList set messageCount=${messageCount} where id=${id}`
+          mysqlQuery(sql, (result, err) => {
+            if (result) {
+              console.log(result)
+            } else {
+              console.log(err)
+            }
+          })
+          res.json({
+            code: 200,
+            msg: 'success',
+            data: null
+          })
+        } else {
+          console.log(err)
+          res.json({
+            code: 400,
+            msg: err,
+            data: null
+          })
+        }
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
+app.post('/addArticle', async (req, res) => {
+  checkIsLogin(req)
+  if (isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  isCheckLogin = false
   let { title, author, introduce, content, category, tags } = req.body
   let createTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
   let readCount = 0
-  let like = 0
   let messageCount = 0
-  let sql = `insert into articleList (title,author,createTime,category,introduce,readCount,messageCount,likeCount,tags,content) value ("${title.replace(/"/g, '\\"')}","${author.replace(/"/g, '\\"')}","${createTime.replace(/"/g, '\\"')}","${category.replace(/"/g, '\\"')}","${introduce.replace(/"/g, '\\"')}",${readCount},${messageCount},${like},"${tags.replace(/"/g, '\\"')}","${content.replace(/"/g, '\\"')}")`
+  let sql = `insert into articleList (title,author,createTime,category,introduce,readCount,messageCount,tags,content) value ("${title.replace(/"/g, '\\"')}","${author.replace(/"/g, '\\"')}","${createTime.replace(/"/g, '\\"')}","${category.replace(/"/g, '\\"')}","${introduce.replace(/"/g, '\\"')}",${readCount},${messageCount},"${tags.replace(/"/g, '\\"')}","${content.replace(/"/g, '\\"')}")`
   console.log(sql)
   mysqlQuery(sql, (result, err) => {
     console.log(result)
@@ -155,6 +323,46 @@ app.post('/addArticle', (req, res) => {
         data: null
       })
     }
+  })
+})
+
+app.post('/addReadCount', (req, res) => {
+  let { id } = req.body
+  let readCount
+  let sql1 = `select readCount from articleList where id=${id}`
+  new Promise((resolve, reject) => {
+    mysqlQuery(sql1, (result, err) => {
+      if (result) {
+        readCount = result[0].readCount
+        console.log(result, readCount)
+        resolve()
+      } else {
+        reject(err)
+      }
+    })
+  }).then(() => {
+    let sql2 = `update articleList set readCount=${readCount + 1} where id=${id}`
+    mysqlQuery(sql2, (result, err) => {
+      if (result) {
+        res.json({
+          code: 200,
+          msg: 'success',
+          data: null
+        })
+      } else {
+        res.json({
+          code: 400,
+          msg: err,
+          data: null
+        })
+      }
+    })
+  }).catch(err => {
+    res.json({
+      code: 400,
+      msg: err,
+      data: null
+    })
   })
 })
 

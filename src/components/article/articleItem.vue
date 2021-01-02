@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 22:06:00
+ * @LastEditTime: 2021-01-02 18:10:44
 -->
 <template>
   <div class="item">
@@ -17,7 +17,6 @@
       <span><i class="iconfont icon-biaoqing7"></i>分类：{{article.category}}</span>
       <span><i class="iconfont icon-biaoqing8"></i>阅读量：{{article.readCount}}</span>
       <span><i class="iconfont icon-biaoqing5"></i>评论：{{article.messageCount}}</span>
-      <span><i class="iconfont icon-biaoqing3"></i>点赞：{{article.likeCount}}</span>
     </div>
     <p class="introduce">{{article.introduce}}</p>
     <div class="tags">
@@ -79,6 +78,7 @@ export default {
     margin-bottom: 10px;
     line-height: 30px;
     font-size: 16px;
+    user-select: text;
     text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;
