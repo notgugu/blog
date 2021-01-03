@@ -4,10 +4,13 @@
  * @Author: mxk
  * @Date: 2020-12-31 14:08:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 15:07:35
+ * @LastEditTime: 2021-01-03 20:15:06
 -->
 <template>
   <div class="write">
+    <div class="header">
+      <h2>新增文章</h2>
+    </div>
     <div class="editor">
     </div>
     <div class="writeMsg">
@@ -22,7 +25,7 @@
       <label><span>*</span>简介<input v-model="introduce" class="introduce" type="text"></label>
     </div>
     <div class="button">
-      <button @click="getDetail">提交</button>
+      <el-button type="primary" @click="getDetail">提交</el-button>
     </div>
   </div>
 </template>
@@ -93,6 +96,11 @@ export default {
   width: 1000px;
   height: 600px;
   margin: 0 auto;
+  .header {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+  }
   .writeMsg {
     padding-top: 30px;
     display: flex;

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:31
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 17:33:02
+ * @LastEditTime: 2021-01-03 12:24:47
 -->
 <template>
   <div class="commentList">
@@ -34,6 +34,7 @@
 <script>
 import commentItem from './commentItem'
 import { addArticleComment } from '@/api/production'
+import { addComment } from '@/api/message'
 import E from 'wangeditor'
 export default {
   name: 'commentList',
@@ -57,6 +58,23 @@ export default {
     }
   },
   methods: {
+    addComment (nickName, comment) {
+      addComment({
+        nickName,
+        comment
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '留言成功'
+        })
+        this.$emit('upLoadComment')
+      }).catch(() => {
+        this.$message({
+          type: 'error',
+          message: '留言失败'
+        })
+      })
+    },
     addArticleComment (id, nickName, comment) {
       addArticleComment({
         id,
@@ -79,8 +97,13 @@ export default {
       let id = this.id
       let nickName = this.nickName
       let comment = this.editor.txt.text()
+      console.log(nickName, comment)
       if (nickName && comment) {
-        this.addArticleComment(id, nickName, comment)
+        if (id) {
+          this.addArticleComment(id, nickName, comment)
+        } else {
+          this.addComment(nickName, comment)
+        }
       } else {
         this.$message({
           type: 'error',

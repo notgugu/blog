@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-01 20:14:44
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 20:20:41
+ * @LastEditTime: 2021-01-03 19:19:29
 -->
 <template>
   <div class="main">
@@ -48,6 +48,11 @@ export default {
           title: '写作',
           icon: 'iconfont icon-biaoqing6',
           path: '/admin/write'
+        },
+        {
+          title: '文章',
+          icon: 'iconfont icon-biaoqing8',
+          path: '/admin/list'
         }
       ]
     }
@@ -55,7 +60,7 @@ export default {
   created () {},
   watch: {
     '$route' (newval) {
-      this.active = this.$storage.getSessionStorage('activeAdmin') || 0
+      this.active = this.$storage.getSessionStorage('active') || 0
     }
   },
   methods: {
@@ -72,7 +77,7 @@ export default {
         location.reload()
       }
       this.active = 0
-      this.$storage.setSessionStorage('activeAdmin', this.active)
+      this.$storage.setSessionStorage('active', this.active)
       this.$router.push('/')
     }
   }

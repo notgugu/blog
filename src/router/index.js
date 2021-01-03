@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 18:20:07
+ * @LastEditTime: 2021-01-03 19:41:17
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -18,6 +18,8 @@ import login from '@/views/login'
 import admin from '@/views/admin'
 import production from '@/views/production'
 import write from '@/views/admin/write'
+import list from '@/views/admin/list'
+import put from '@/views/admin/put'
 
 Vue.use(Router)
 
@@ -111,6 +113,26 @@ export default new Router({
             isKeepAlive: true,
             isNeedLogin: true,
             index: '0'
+          }
+        },
+        {
+          path: 'list',
+          name: 'list',
+          component: list,
+          meta: {
+            isKeepAlive: false,
+            isNeedLogin: true,
+            index: '1'
+          }
+        },
+        {
+          path: 'put/:id',
+          name: 'put',
+          component: put,
+          meta: {
+            isKeepAlive: false,
+            isNeedLogin: true,
+            index: '2'
           }
         }
       ]

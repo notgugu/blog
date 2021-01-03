@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 18:10:44
+ * @LastEditTime: 2021-01-03 19:39:46
 -->
 <template>
   <div class="item">
@@ -28,6 +28,12 @@
       {{item}}
       </div>
     </div>
+    <div class="putArticle"
+      v-if="isInAdmin"
+      @click="gotoPutArticle"
+    >
+        <el-button>修改</el-button>
+      </div>
   </div>
 </template>
 
@@ -35,7 +41,9 @@
 export default {
   name: 'articleItem',
   data () {
-    return {}
+    return {
+      isInAdmin: false
+    }
   },
   props: {
     article: {
@@ -43,7 +51,17 @@ export default {
       default: () => {}
     }
   },
-  methods: {}
+  created () {
+    if (this.$route.path.indexOf('admin') !== -1) {
+      this.isInAdmin = true
+    }
+  },
+  methods: {
+    gotoPutArticle () {
+      let id = this.article.id
+      this.$router.push('/admin/put/' + id)
+    }
+  }
 }
 </script>
 
@@ -98,6 +116,10 @@ export default {
       color: #67c23a;
       border-radius: 2px;
     }
+  }
+  .putArticle {
+    display: flex;
+    flex-direction: row-reverse;
   }
 }
 </style>

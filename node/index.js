@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-30 16:11:08
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 18:13:11
+ * @LastEditTime: 2021-01-03 19:57:52
  */
 const mysql = require('mysql')
 const http = require('http')
@@ -170,6 +170,66 @@ app.get('/getArticle', (req, res) => {
   })
 })
 
+app.get('/getComment', (req, res) => {
+  let sql = `select * from commentList`
+  mysqlQuery(sql, (result, err) => {
+    console.log(result)
+    if (result && result.length > 0) {
+      let data = result.map(item => {
+        return {
+          content: JSON.parse(item.content)
+        }
+      })
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: {
+          data
+        }
+      })
+    } else {
+      if (err) {
+        console.log(err)
+        res.json({
+          code: 400,
+          msg: 'failed',
+          data: null
+        })
+      } else {
+        res.json({
+          code: 200,
+          msg: '暂无评论',
+          data: {}
+        })
+      }
+    }
+  })
+})
+
+app.post('/addComment', (req, res) => {
+  let {nickName, comment} = req.body
+  let createTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+  let content = {nickName, comment, createTime}
+  content = JSON.stringify(content)
+  let sql = `insert into commentList (content) values ('${content}')`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
 app.get('/getArticleComment', (req, res) => {
   let id = req.query.id
   let sql = `select * from articleComment where id=${id}`
@@ -196,7 +256,7 @@ app.get('/getArticleComment', (req, res) => {
         res.json({
           code: 200,
           msg: '暂无评论',
-          data: null
+          data: {}
         })
       }
     }
@@ -292,7 +352,7 @@ app.post('/addArticleComment', (req, res) => {
 
 app.post('/addArticle', async (req, res) => {
   checkIsLogin(req)
-  if (isCheckLogin) {
+  if (!isCheckLogin) {
     res.json({
       code: 403,
       msg: '该功能仅登录后可使用',
@@ -363,6 +423,40 @@ app.post('/addReadCount', (req, res) => {
       msg: err,
       data: null
     })
+  })
+})
+
+app.post('/putArticle', async (req, res) => {
+  checkIsLogin(req)
+  console.log(isCheckLogin)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  isCheckLogin = false
+  let { id, articleData } = req.body
+  let sql = `update articleList set title="${articleData.title.replace(/"/g, '\\"')}",author="${articleData.author.replace(/"/g, '\\"')}",category="${articleData.category.replace(/"/g, '\\"')}",introduce="${articleData.introduce.replace(/"/g, '\\"')}",tags="${articleData.tags.replace(/"/g, '\\"')}",content="${articleData.content.replace(/"/g, '\\"')}" where id=${id}`
+  console.log(sql)
+  mysqlQuery(sql, (result, err) => {
+    console.log(result)
+    if (result) {
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: '数据库插入失败',
+        data: null
+      })
+    }
   })
 })
 

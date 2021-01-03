@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 15:09:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 10:57:42
+ * @LastEditTime: 2021-01-03 12:29:13
 -->
 <template>
   <div class="main">
@@ -34,10 +34,12 @@
       </keep-alive>
       <router-view v-if="!this.$route.meta.isKeepAlive"/>
     </div>
+    <go-top></go-top>
   </div>
 </template>
 
 <script>
+import goTop from '@/components/goTop/goTop'
 export default {
   name: 'index',
   data () {
@@ -95,6 +97,9 @@ export default {
       this.$storage.setSessionStorage('active', this.active)
       this.$router.push('/')
     }
+  },
+  components: {
+    goTop
   }
 }
 </script>

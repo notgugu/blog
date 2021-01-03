@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 15:18:14
+ * @LastEditTime: 2021-01-03 16:39:54
 -->
 <template>
   <div class="home">
@@ -91,14 +91,12 @@
         </card>
       </div>
     </div>
-    <go-top></go-top>
   </div>
 </template>
 
 <script>
 import articleList from '@/components/article/articleList'
 import card from '@/components/card/card'
-import goTop from '@/components/goTop/goTop'
 import { getArticleList, getHotArticleList } from '@/api/home'
 export default {
   name: 'home',
@@ -177,8 +175,7 @@ export default {
   },
   components: {
     articleList,
-    card,
-    goTop
+    card
   }
 }
 </script>
