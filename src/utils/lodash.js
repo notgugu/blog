@@ -4,20 +4,18 @@
  * @Author: mxk
  * @Date: 2021-01-04 13:37:30
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 13:46:19
+ * @LastEditTime: 2021-01-04 16:07:41
  */
 
 function throttle (fun, interval) {
-  let flag = true
+  let time = 0
   return function (...args) {
     let that = this
-    if (!flag) {
-      return
-    }
-    flag = false
-    setTimeout(() => {
+    let nowTime = new Date()
+    if (nowTime - time > interval) {
       fun.apply(that, args)
-    }, interval)
+    }
+    time = nowTime
   }
 }
 
