@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 14:03:01
+ * @LastEditTime: 2021-01-04 09:12:16
 -->
 <template>
   <div class="list">
@@ -48,6 +48,7 @@ export default {
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
       if (clientHeight + scrollTop >= scrollHeight) {
+        // 当列表拉到最下面时 通知父组件执行事件
         this.$emit('loading')
       }
     }

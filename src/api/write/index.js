@@ -4,9 +4,9 @@
  * @Author: mxk
  * @Date: 2021-01-01 16:35:09
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 16:35:41
+ * @LastEditTime: 2021-01-04 09:42:50
  */
 import http from '@/utils/request'
 export function addArticle (data) {
-  return http.post('/addArticle', data)
+  return http.post('/admin/addArticle', data)
 }

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-01 20:03:56
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-01 21:07:46
+ * @LastEditTime: 2021-01-04 09:06:48
 -->
 <template>
   <div class="login">
@@ -13,8 +13,8 @@
       <label>帐号:<input v-model="account" type="text"></label>
       <label>密码:<input v-model="password" type="password"></label>
       <div class="btn">
-        <button @click="login">登陆</button>
-        <button @click="back">返回博客</button>
+        <el-button @click="login">登陆</el-button>
+        <el-button @click="back">返回博客</el-button>
       </div>
     </div>
   </div>
@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     login () {
-      console.log(this.account, this.password)
       let account = this.account
       let password = this.password
       login({

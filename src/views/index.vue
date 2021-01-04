@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 15:09:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 12:29:13
+ * @LastEditTime: 2021-01-04 09:08:43
 -->
 <template>
   <div class="main">
@@ -77,6 +77,7 @@ export default {
   created () {},
   watch: {
     '$route' (newval) {
+      // 监听路由变化获取active值，active值在导航守卫里改变
       this.active = this.$storage.getSessionStorage('active') || 0
     }
   },

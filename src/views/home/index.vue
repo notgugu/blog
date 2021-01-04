@@ -4,15 +4,16 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 16:39:54
+ * @LastEditTime: 2021-01-04 09:10:40
 -->
 <template>
   <div class="home">
     <div class="content">
       <div class="content-article">
-        <article-list :articleList="articleListData"
-        :nomore="nomore"
-        @loading="loading"
+        <article-list
+          :articleList="articleListData"
+          :nomore="nomore"
+          @loading="loading"
         ></article-list>
       </div>
       <div class="content-explain">
@@ -118,11 +119,13 @@ export default {
   },
   computed: {
     nomore () {
+      // 传给文章列表组件的数据 判断文章是否请求完了
       return this.articleListData.length >= this.total
     }
   },
   methods: {
     loading () {
+      // 文章列表拉到底部执行的事件
       this.page++
       if (!this.isLoading) {
         this.getArticleList()

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 18:20:32
+ * @LastEditTime: 2021-01-04 09:14:44
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -28,10 +28,12 @@ Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
 Vue.directive('gotoArticle', {
+  // 自定义指令
   inserted (el, binding) {
     let nowTime = new Date()
     el.addEventListener('click', () => {
       if (new Date() - nowTime > 1000) {
+        // 节流 埋点记录文章点击量
         addReadCount({
           id: binding.value
         }).then(res => {

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 11:04:29
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 18:15:04
+ * @LastEditTime: 2021-01-04 09:16:20
 -->
 <template>
   <div
@@ -27,6 +27,7 @@ export default {
     scrollListen () {
       const scrollTop = document.documentElement.scrollTop
       if (scrollTop > 200) {
+        // 如果滚动条高度大于200 显示该组件
         this.isOnTop = false
       } else {
         this.isOnTop = true
@@ -37,6 +38,7 @@ export default {
       const scrollTop = document.documentElement.scrollTop
       document.documentElement.scrollTop -= scrollTop / spacing
       if (scrollTop > 0) {
+        // 递归调用向上的动画
         window.requestAnimationFrame(this.goTop)
       } else {
         this.isOnTop = true
