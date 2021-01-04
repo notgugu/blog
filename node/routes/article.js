@@ -4,11 +4,11 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:22:40
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:38:43
+ * @LastEditTime: 2021-01-04 19:00:12
  */
 const express = require('express')
 const mysqlQuery = require('../utils/index')
-const router = express.router()
+const router = express.Router()
 
 router.get('/getArticleList', (req, res) => {
   let page = req.query.page

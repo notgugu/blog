@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 08:56:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 14:36:38
+ * @LastEditTime: 2021-01-04 21:13:00
  */
 import axios from 'axios'
 import storage from './storage'
@@ -12,7 +12,7 @@ import router from '../router'
 import { MessageBox } from 'element-ui'
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.interceptors.request.use((config) => {
-  let token = storage.getLocalStorage('token') || ''
+  let token = storage.getSessionStorage('token') || ''
   if (token) {
     config.headers.token = token
   }

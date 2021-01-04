@@ -4,13 +4,14 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 13:05:17
+ * @LastEditTime: 2021-01-04 22:29:09
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import storage from './utils/storage'
 import '@/assets/iconfont/iconfont.css'
 import iconfont from '@/assets/iconfont/iconfont.js'
@@ -24,6 +25,7 @@ import { addReadCount } from '@/api/production'
 Vue.prototype.$ELEMENT = {zIndex: 20000}
 Vue.prototype.$storage = storage
 Vue.prototype.$messageBox = MessageBox
+Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
 
@@ -50,7 +52,10 @@ Vue.directive('gotoArticle', {
 
 router.beforeEach((to, from, next) => {
   nprogress.start()
-  if (to.meta.isNeedLogin && !storage.getLocalStorage('token')) {
+  if (storage.getSessionStorage('token')) {
+    store.commit('setLoginState', true)
+  }
+  if (to.meta.isNeedLogin && !storage.getSessionStorage('token')) {
     router.push('/login')
   }
   if (to.meta.index) {
@@ -70,6 +75,7 @@ Vue.use(Input)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

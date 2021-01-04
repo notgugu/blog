@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-01 20:03:56
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 13:15:31
+ * @LastEditTime: 2021-01-04 21:23:24
 -->
 <template>
   <div class="login">
@@ -41,7 +41,8 @@ export default {
         password
       }).then(res => {
         if (res.token) {
-          this.$storage.setLocalStorage('token', res.token)
+          this.$storage.setSessionStorage('token', res.token)
+          this.$store.commit('setLoginState', true)
         }
         this.$router.push('/admin')
       }).catch(err => {

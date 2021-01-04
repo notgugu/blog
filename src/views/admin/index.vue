@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-01 20:14:44
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 19:19:29
+ * @LastEditTime: 2021-01-04 21:25:16
 -->
 <template>
   <div class="main">
@@ -73,9 +73,6 @@ export default {
       }
     },
     refresh () {
-      if (this.active === 0) {
-        location.reload()
-      }
       this.active = 0
       this.$storage.setSessionStorage('active', this.active)
       this.$router.push('/')
