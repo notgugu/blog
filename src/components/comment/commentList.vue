@@ -4,18 +4,19 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:31
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 12:24:47
+ * @LastEditTime: 2021-01-04 14:27:16
 -->
 <template>
   <div class="commentList">
     <h2>留言</h2>
     <div class="input">
       <label><span>*</span>昵称<input v-model="nickName" type="text" placeholder="请输入您的昵称"></label>
+      <label><span>*</span>邮箱<input v-model="email" type="text" placeholder="请输入您的邮箱"></label>
     </div>
     <div class="editor">
     </div>
     <div class="button">
-      <el-button type="primary" @click="submitComment">提交</el-button>
+      <el-button type="primary" @click="throttle(submitComment, 1000)">提交</el-button>
       <el-button @click="resetValue">重置</el-button>
     </div>
     <div class="comment-content">
@@ -35,6 +36,7 @@
 import commentItem from './commentItem'
 import { addArticleComment } from '@/api/production'
 import { addComment } from '@/api/message'
+import { throttle } from '@/utils/lodash'
 import E from 'wangeditor'
 export default {
   name: 'commentList',
@@ -44,7 +46,8 @@ export default {
   data () {
     return {
       editor: null,
-      nickName: ''
+      nickName: '',
+      email: ''
     }
   },
   props: {
@@ -58,6 +61,7 @@ export default {
     }
   },
   methods: {
+    throttle,
     addComment (nickName, comment) {
       addComment({
         nickName,
@@ -85,6 +89,7 @@ export default {
           type: 'success',
           message: '留言成功'
         })
+        this.resetValue()
         this.$emit('upLoadComment')
       }).catch(() => {
         this.$message({

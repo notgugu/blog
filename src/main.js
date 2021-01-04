@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:14:44
+ * @LastEditTime: 2021-01-04 13:05:17
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -16,7 +16,7 @@ import '@/assets/iconfont/iconfont.css'
 import iconfont from '@/assets/iconfont/iconfont.js'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { MessageBox, Message, Button } from 'element-ui'
+import { MessageBox, Message, Button, Input } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { addReadCount } from '@/api/production'
 // import './mock/mock'
@@ -65,6 +65,7 @@ router.afterEach(() => {
 
 Vue.use(iconfont)
 Vue.use(Button)
+Vue.use(Input)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

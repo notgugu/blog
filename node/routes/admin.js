@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:23:00
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:39:42
+ * @LastEditTime: 2021-01-04 10:04:07
  */
 const express = require('express')
 const jwt = require('jsonwebtoken')
@@ -41,7 +41,6 @@ router.post('/login', (req, res) => {
       if (data.account === account && data.password === password) {
         let payload = {account, password}
         token = jwt.sign(payload, secret)
-        console.log(token)
         res.json({
           code: 200,
           msg: '登陆成功',
@@ -67,7 +66,7 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.post('/addArticle', async (req, res) => {
+router.post('/addArticle', (req, res) => {
   checkIsLogin(req)
   if (!isCheckLogin) {
     res.json({
@@ -103,7 +102,7 @@ router.post('/addArticle', async (req, res) => {
   })
 })
 
-router.post('/putArticle', async (req, res) => {
+router.post('/putArticle', (req, res) => {
   checkIsLogin(req)
   console.log(isCheckLogin)
   if (!isCheckLogin) {

@@ -4,16 +4,18 @@
  * @Author: mxk
  * @Date: 2021-01-01 20:03:56
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:06:48
+ * @LastEditTime: 2021-01-04 13:15:31
 -->
 <template>
   <div class="login">
     <h2>登陆</h2>
     <div class="loginBox">
-      <label>帐号:<input v-model="account" type="text"></label>
-      <label>密码:<input v-model="password" type="password"></label>
+      <div class="account">
+        <div class="item"><span>帐号:</span><el-input v-model="account" type="text"/></div>
+        <div class="item"><span>密码:</span><el-input v-model="password" type="password"/></div>
+      </div>
       <div class="btn">
-        <el-button @click="login">登陆</el-button>
+        <el-button type="primary" @click="login">登陆</el-button>
         <el-button @click="back">返回博客</el-button>
       </div>
     </div>
