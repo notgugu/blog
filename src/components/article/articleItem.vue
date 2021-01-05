@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 19:39:46
+ * @LastEditTime: 2021-01-05 09:32:10
 -->
 <template>
   <div class="item">
@@ -30,9 +30,9 @@
     </div>
     <div class="putArticle"
       v-if="isInAdmin"
-      @click="gotoPutArticle"
     >
-        <el-button>修改</el-button>
+        <el-button @click="gotoPutArticle">修改</el-button>
+        <el-button @click="deleteArticle">删除文章</el-button>
       </div>
   </div>
 </template>
@@ -57,6 +57,7 @@ export default {
     }
   },
   methods: {
+    deleteArticle () {},
     gotoPutArticle () {
       let id = this.article.id
       this.$router.push('/admin/put/' + id)

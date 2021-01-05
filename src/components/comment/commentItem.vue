@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:43
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 22:42:07
+ * @LastEditTime: 2021-01-05 09:05:25
 -->
 <template>
   <div class="commentItem">
@@ -15,7 +15,7 @@
     <div class="content">
       <p v-text="content.comment"></p>
       <div v-if="content.review" class="return">
-        <div class="detail"><p class="red">博主回复：</p><p>{{content.review}}</p></div>
+        <div class="detail"><p class="red">博主回复：</p><p v-text="content.review"></p></div>
         <div class="time"><p>{{content.reviewTime}}</p></div>
       </div>
     </div>

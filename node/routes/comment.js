@@ -4,12 +4,11 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:22:53
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 22:49:26
+ * @LastEditTime: 2021-01-05 09:37:28
  */
 const express = require('express')
 const mysqlQuery = require('../utils/index')
 const moment = require('moment')
-const sendEmail = require('../utils/email.js')
 const router = express.Router()
 
 router.get('/getComment', (req, res) => {
@@ -165,27 +164,8 @@ router.post('/addArticleComment', (req, res) => {
   })
 })
 
-router.post('/reviewComment', (req, res) => {
-  let { id, review, email } = req.body
-  let reviewTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-  let sql = `update commentList set review='${review}',reviewTime='${reviewTime}' where id=${id}`
-  mysqlQuery(sql, (result, err) => {
-    if (result) {
-      sendEmail(email)
-      res.json({
-        code: 200,
-        msg: 'success',
-        data: null
-      })
-    } else {
-      console.log(err)
-      res.json({
-        code: 400,
-        msg: err,
-        data: null
-      })
-    }
-  })
-})
+// router.post('/deleteComment', (req, res) => {
+//   let { id } = req.body
+// })
 
 module.exports = router

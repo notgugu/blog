@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-02 11:13:33
+ * @LastEditTime: 2021-01-05 13:10:42
 -->
 <template>
   <div id="app">
@@ -15,6 +15,7 @@
 <script>
 export default {
   name: 'App',
+  data () {},
   created () {
     document.title = '凡 天行健，君子以自强不息'
     setTimeout(() => {

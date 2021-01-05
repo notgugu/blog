@@ -4,12 +4,13 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:31
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 21:50:06
+ * @LastEditTime: 2021-01-05 09:58:31
 -->
 <template>
   <div class="commentList">
     <div class="comment-header">
       <h2>留言</h2>
+      <div class="message"><span>*</span>请务必输入有效的邮箱地址，不然得不到回复信息的哦</div>
       <div class="input">
         <div class="item">
           <i>*</i><span>昵称</span><el-input v-model="nickName" type="text" placeholder="请输入您的昵称"/>
@@ -117,7 +118,7 @@ export default {
       if (!this.emailValidate(email)) {
         this.$message({
           type: 'error',
-          message: '请输入正确格式的邮箱，不然得不到回复的！例如534957983@qq.com'
+          message: '请输入正确格式的邮箱，不然得不到回复的！例如xxxxx@xxxx.com'
         })
         return
       }
@@ -155,6 +156,12 @@ export default {
     i {
       color: red;
       padding: 0 10px;
+    }
+    .message {
+      padding-top: 10px;
+      span {
+        color: red
+      }
     }
     .input {
       display: flex;

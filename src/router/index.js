@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 19:41:17
+ * @LastEditTime: 2021-01-05 13:25:24
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -14,12 +14,12 @@ import category from '@/views/category'
 import pigeonhole from '@/views/pigeonhole'
 import message from '@/views/message'
 import mine from '@/views/mine'
-import login from '@/views/login'
-import admin from '@/views/admin'
 import production from '@/views/production'
-import write from '@/views/admin/write'
-import list from '@/views/admin/list'
-import put from '@/views/admin/put'
+const login = () => import(/* webpackChunkName: "Login" */'@/views/login')
+const admin = () => import(/* webpackChunkName: "Admin" */'@/views/admin')
+const write = () => import(/* webpackChunkName: "Write" */'@/views/admin/write')
+const list = () => import(/* webpackChunkName: "List" */'@/views/admin/list')
+const put = () => import(/* webpackChunkName: "Put" */'@/views/admin/put')
 
 Vue.use(Router)
 

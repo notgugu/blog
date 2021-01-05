@@ -4,10 +4,14 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 22:48:04
+ * @LastEditTime: 2021-01-05 10:05:53
 -->
 <template>
   <div class="message">
+    <div class="header">
+      <h1>给我留言</h1>
+      <img src="../../assets/image/huhuhu.jpg" alt="哎呀，图片加载不出来了">
+    </div>
     <comment-list
       :commentListData="commentListData"
       @upLoadComment="upLoadComment"

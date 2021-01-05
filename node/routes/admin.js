@@ -4,11 +4,12 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:23:00
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 19:00:02
+ * @LastEditTime: 2021-01-05 09:39:06
  */
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
+const sendEmail = require('../utils/email.js')
 const mysqlQuery = require('../utils/index')
 const router = express.Router()
 const secret = 'mxk'
@@ -130,6 +131,40 @@ router.post('/putArticle', (req, res) => {
       res.json({
         code: 400,
         msg: '数据库插入失败',
+        data: null
+      })
+    }
+  })
+})
+
+router.post('/reviewComment', (req, res) => {
+  checkIsLogin(req)
+  console.log(isCheckLogin)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  isCheckLogin = false
+  let { id, review, email } = req.body
+  let reviewTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+  let sql = `update commentList set review='${review}',reviewTime='${reviewTime}' where id=${id}`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      sendEmail(email)
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
         data: null
       })
     }
