@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-30 14:05:30
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-30 15:02:49
+ * @LastEditTime: 2021-01-05 17:12:43
 -->
 <template>
   <div class="card">
@@ -27,7 +27,7 @@ export default {
   props: {
     icon: {
       type: String,
-      default: ''
+      default: '#icon-card'
     },
     title: {
       type: String,
