@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 13:10:42
+ * @LastEditTime: 2021-01-05 17:01:52
 -->
 <template>
   <div id="app">
@@ -18,6 +18,13 @@ export default {
   data () {},
   created () {
     document.title = '凡 天行健，君子以自强不息'
+    let devices = ['iPhone', 'Android', 'Windows Phone']
+    let ua = window.navigator.userAgent
+    for (let i = 0; i < devices.length; i++) {
+      if (ua.indexOf(devices[i]) !== -1) {
+        alert('本站移动端适配暂未支持（计划中），请用电脑浏览器访问！')
+      }
+    }
     setTimeout(() => {
       window.L2Dwidget.init({
         pluginRootPath: '/static/live2dw/',

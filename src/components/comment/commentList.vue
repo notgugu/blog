@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:31
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 09:58:31
+ * @LastEditTime: 2021-01-05 17:06:26
 -->
 <template>
   <div class="commentList">
@@ -118,7 +118,7 @@ export default {
       if (!this.emailValidate(email)) {
         this.$message({
           type: 'error',
-          message: '请输入正确格式的邮箱，不然得不到回复的！例如xxxxx@xxxx.com'
+          message: '请输入正确格式的邮箱，不然得不到回复的！例如xxxxx@xxxx.xxx'
         })
         return
       }
