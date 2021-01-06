@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-01 21:48:28
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:42:29
+ * @LastEditTime: 2021-01-06 16:16:00
  */
 import http from '@/utils/request'
 export function getArticle (params) {
@@ -21,4 +21,8 @@ export function getArticleComment (params) {
 
 export function addArticleComment (data) {
   return http.post('/comment/addArticleComment', data)
+}
+
+export function deleteArticleComment (data) {
+  return http.post('/admin/deleteArticleComment', data)
 }

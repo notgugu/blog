@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 11:04:29
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:16:20
+ * @LastEditTime: 2021-01-05 22:53:01
 -->
 <template>
   <div
@@ -57,7 +57,7 @@ export default {
   right: 100px;
   bottom: 200px;
   width: 38px;
-  height: 38px;
+  height: 40px;
   background-color: #e1f3d8;
   border: 1px solid #eee;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);

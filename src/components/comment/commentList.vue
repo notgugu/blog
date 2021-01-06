@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:31
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 17:06:26
+ * @LastEditTime: 2021-01-06 15:02:32
 -->
 <template>
   <div class="commentList">
@@ -82,7 +82,7 @@ export default {
           type: 'success',
           message: '留言成功'
         })
-        this.$emit('upLoadComment')
+        this.$store.commit('setUpdateState')
       }).catch(() => {
         this.$message({
           type: 'error',
@@ -102,7 +102,7 @@ export default {
           message: '留言成功'
         })
         this.resetValue()
-        this.$emit('upLoadComment')
+        this.$store.commit('setUpdateState')
       }).catch(() => {
         this.$message({
           type: 'error',

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:23:00
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 09:39:06
+ * @LastEditTime: 2021-01-06 16:27:18
  */
 const express = require('express')
 const jwt = require('jsonwebtoken')
@@ -159,6 +159,121 @@ router.post('/reviewComment', (req, res) => {
         code: 200,
         msg: 'success',
         data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
+router.post('/deleteArticle', (req, res) => {
+  checkIsLogin(req)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  let { id } = req.body
+  let sql = `delete from articleList where id=${id}`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
+router.post('/deleteComment', (req, res) => {
+  checkIsLogin(req)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  let { id } = req.body
+  let sql = `delete from commentList where id=${id}`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
+router.post('/deleteArticleComment', (req, res) => {
+  checkIsLogin(req)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  let { createTime, id } = req.body
+  let sql = `delete from articleComment where createTime='${createTime}'`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      sql = `select * from articleComment where id=${id}`
+      mysqlQuery(sql, (result, err) => {
+        if (result) {
+          let messageCount = result.length
+          sql = `update articleList set messageCount=${messageCount} where id=${id}`
+          mysqlQuery(sql, (result, err) => {
+            if (result) {
+              res.json({
+                code: 200,
+                msg: 'success',
+                data: null
+              })
+            } else {
+              console.log(err)
+              res.json({
+                code: 400,
+                msg: err,
+                data: null
+              })
+            }
+          })
+        } else {
+          console.log(err)
+          res.json({
+            code: 400,
+            msg: err,
+            data: null
+          })
+        }
       })
     } else {
       console.log(err)

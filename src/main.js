@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 22:29:09
+ * @LastEditTime: 2021-01-06 16:38:17
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -17,6 +17,7 @@ import '@/assets/iconfont/iconfont.css'
 import iconfont from '@/assets/iconfont/iconfont.js'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+import 'highlight.js/styles/vs.css'
 import { MessageBox, Message, Button, Input } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import { addReadCount } from '@/api/production'
@@ -26,6 +27,7 @@ Vue.prototype.$ELEMENT = {zIndex: 20000}
 Vue.prototype.$storage = storage
 Vue.prototype.$messageBox = MessageBox
 Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
 

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 10:05:53
+ * @LastEditTime: 2021-01-06 15:54:50
 -->
 <template>
   <div class="message">
@@ -14,7 +14,6 @@
     </div>
     <comment-list
       :commentListData="commentListData"
-      @upLoadComment="upLoadComment"
     ></comment-list>
   </div>
 </template>
@@ -35,22 +34,28 @@ export default {
   created () {
     this.getComment()
   },
+  watch: {
+    isUpdateComment: function (newval) {
+      this.getComment()
+    }
+  },
+  computed: {
+    isUpdateComment () {
+      return this.$store.getters.isUpdateComment
+    }
+  },
   methods: {
     getComment () {
       getComment().then(res => {
-        console.log(res)
         let data = []
-        res.data.forEach(item => {
+        res.forEach(item => {
           data.push(item.content)
         })
         this.commentListData.data = data.reverse()
-        this.commentListData.total = res.data.length
+        this.commentListData.total = res.length
       }).catch(err => {
         console.log(err)
       })
-    },
-    upLoadComment () {
-      this.getComment()
     }
   },
   components: {

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 14:08:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 22:01:35
+ * @LastEditTime: 2021-01-06 16:38:29
 -->
 <template>
   <div class="article">
@@ -20,7 +20,7 @@
     </div>
     <div class="content" v-html="articleData.content"></div>
     <div class="end">----------本文结束，感谢您的阅读----------</div>
-    <comment-list :commentListData="commentListData" :id="id" @upLoadComment="upLoadComment"></comment-list>
+    <comment-list :commentListData="commentListData" :id="id"></comment-list>
   </div>
 </template>
 
@@ -51,12 +51,12 @@ export default {
       this.id = this.$route.params.id
       this.getArticle()
       this.getArticleComment()
+    },
+    isUpdateComment (newval) {
+      this.getArticleComment()
     }
   },
   methods: {
-    upLoadComment () {
-      this.getArticleComment()
-    },
     getArticleComment () {
       let id = this.id
       getArticleComment({
@@ -88,7 +88,12 @@ export default {
       })
     }
   },
-  mounted () {}
+  mounted () {},
+  computed: {
+    isUpdateComment () {
+      return this.$store.getters.isUpdateComment
+    }
+  }
 }
 </script>
 

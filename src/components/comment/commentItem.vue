@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-02 16:02:43
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 09:05:25
+ * @LastEditTime: 2021-01-06 16:27:36
 -->
 <template>
   <div class="commentItem">
@@ -27,12 +27,15 @@
 </template>
 
 <script>
-import { reviewComment } from '@/api/message'
+import { reviewComment, deleteComment } from '@/api/message'
+import { deleteArticleComment } from '@/api/production'
 export default {
   name: 'commentItem',
   data () {
     return {
-      isOnAdmin: this.$store.getters.isOnLogin
+      isOnAdmin: this.$store.getters.isOnLogin,
+      isInArticle: this.$route.path.indexOf('article') !== -1,
+      id: this.$route.params.id || ''
     }
   },
   props: {
@@ -42,6 +45,56 @@ export default {
     }
   },
   methods: {
+    deleteArticleComment () {
+      let createTime = this.content.createTime
+      let id = this.id
+      deleteArticleComment({createTime, id}).then(res => {
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+        this.$store.commit('setUpdateState')
+      }).catch(err => {
+        console.log(err)
+        this.$message({
+          type: 'error',
+          message: '删除失败'
+        })
+      })
+    },
+    deleteComment () {
+      let id = this.content.id
+      this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log(this)
+        if (this.isInArticle) {
+          this.deleteArticleComment()
+        } else {
+          deleteComment({id}).then(res => {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            this.$store.commit('setUpdateState')
+          }).catch(err => {
+            console.log(err)
+            this.$message({
+              type: 'error',
+              message: '删除失败'
+            })
+          })
+        }
+      }).catch((err) => {
+        console.log(err)
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
     reviewComment () {
       let id = this.content.id
       let email = this.content.email
@@ -58,6 +111,7 @@ export default {
             type: 'success',
             message: '回复成功'
           })
+          this.$store.commit('setUpdateState')
         }).catch(err => {
           console.log(err)
           this.$message({
@@ -71,8 +125,7 @@ export default {
           message: '取消输入'
         })
       })
-    },
-    deleteComment () {}
+    }
   }
 }
 </script>

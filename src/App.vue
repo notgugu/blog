@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 17:01:52
+ * @LastEditTime: 2021-01-06 14:01:23
 -->
 <template>
   <div id="app">
@@ -15,7 +15,6 @@
 <script>
 export default {
   name: 'App',
-  data () {},
   created () {
     document.title = '凡 天行健，君子以自强不息'
     let devices = ['iPhone', 'Android', 'Windows Phone']

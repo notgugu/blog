@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:22:53
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 09:37:28
+ * @LastEditTime: 2021-01-06 15:54:15
  */
 const express = require('express')
 const mysqlQuery = require('../utils/index')
@@ -32,9 +32,7 @@ router.get('/getComment', (req, res) => {
       res.json({
         code: 200,
         msg: 'success',
-        data: {
-          data
-        }
+        data
       })
     } else {
       if (err) {
@@ -48,7 +46,7 @@ router.get('/getComment', (req, res) => {
         res.json({
           code: 200,
           msg: '暂无评论',
-          data: {}
+          data: []
         })
       }
     }
