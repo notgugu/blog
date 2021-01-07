@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-04 09:12:16
+ * @LastEditTime: 2021-01-07 13:16:42
 -->
 <template>
   <div class="list">
@@ -14,7 +14,7 @@
       :article="item"
     >
     </article-item>
-    <div class="bottom" ref="tip">
+    <div class="bottom">
       <p v-if="!nomore">加载中。。。</p>
       <p v-else>没有更多了</p>
     </div>
@@ -47,8 +47,8 @@ export default {
       const clientHeight = document.documentElement.clientHeight
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
-      if (clientHeight + scrollTop >= scrollHeight) {
-        // 当列表拉到最下面时 通知父组件执行事件
+      if (clientHeight + scrollTop >= scrollHeight - 100) {
+        // 当列表拉到离底部100时 通知父组件执行loading事件
         this.$emit('loading')
       }
     }

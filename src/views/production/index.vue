@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 14:08:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-06 16:38:29
+ * @LastEditTime: 2021-01-07 13:30:00
 -->
 <template>
   <div class="article">
@@ -100,8 +100,8 @@ export default {
 <style scoped lang='less'>
 @import '../../assets/css/article/index.less';
 </style>
-<style lang='less'>
-.hljs {
+<style scoped lang='less'>
+/deep/.hljs {
   background-color: #ddd;
 }
 </style>

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-05 10:57:19
+ * @LastEditTime: 2021-01-07 08:54:31
 -->
 <template>
   <div class="mine">
@@ -23,7 +23,7 @@
               熟练使用javaScript，熟悉es6语法；<br>
               熟练使用vue.js、axios等；<br>
               熟悉webpack，git等前端工具的使用；<br>
-              了解使用node.js开发简单的web后端应用，如本博客后台；<br>
+              了解使用node.js开发简单的web后端应用，如本博客后台接口；<br>
             </p>
             <p>
               <span>个人简介：</span>一个99年的萌新前端，19年年底即大三上开始学习前端，20年6月底大三下开始实习，一边工作一边学习，会在本博客持续分享一些技术博客和工作经历等文章。
