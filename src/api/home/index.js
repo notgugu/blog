@@ -14,3 +14,7 @@ export function getArticleList (params) {
 export function getHotArticleList (params) {
   return http.get('/article/getHotArticleList', params)
 }
+
+export function getNewArticleList (params) {
+  return http.get('/article/getNewArticleList', params)
+}

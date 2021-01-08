@@ -62,12 +62,12 @@ router.get('/getArticleList', (req, res) => {
 })
 
 router.get('/getHotArticleList', (req, res) => {
-  let sql = `select * from articleList`
+  let sql = `select * from articleList order by id limit 10`
   mysqlQuery(sql, (result, err) => {
     if (result) {
       let data = result.sort((a, b) => {
         return b.readCount - a.readCount
-      }).slice(0, 10).map(item => {
+      }).map(item => {
         return {
           id: item.id,
           title: item.title
@@ -79,6 +79,32 @@ router.get('/getHotArticleList', (req, res) => {
         data
       })
     } else {
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
+router.get('/getNewArticleList', (req, res) => {
+  let sql = `select * from articleList order by id desc limit 10`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      let data = result.map(item => {
+        return {
+          id: item.id,
+          title: item.title
+        }
+      })
+      res.json({
+        code: 200,
+        msg: 'success',
+        data
+      })
+    } else {
+      console.log(err)
       res.json({
         code: 400,
         msg: err,

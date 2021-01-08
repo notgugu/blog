@@ -83,6 +83,13 @@
       "unicode_decimal": 58912
     },
     {
+      "icon_id": "12195272",
+      "name": "new badge",
+      "font_class": "newbadge",
+      "unicode": "eca8",
+      "unicode_decimal": 60584
+    },
+    {
       "icon_id": "18454604",
       "name": "导航",
       "font_class": "daohang",
@@ -123,20 +130,6 @@
       "font_class": "external_wechat",
       "unicode": "e60c",
       "unicode_decimal": 58892
-    },
-    {
-      "icon_id": "19036556",
-      "name": "praise_2",
-      "font_class": "praise_2",
-      "unicode": "e60d",
-      "unicode_decimal": 58893
-    },
-    {
-      "icon_id": "19036559",
-      "name": "praise_1",
-      "font_class": "praise_1",
-      "unicode": "e611",
-      "unicode_decimal": 58897
     }
   ]
 }

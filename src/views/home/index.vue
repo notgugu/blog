@@ -90,6 +90,22 @@
             </div>
           </template>
         </card>
+        <card
+          :icon="'#icon-newbadge'"
+          :title="'最新文章'"
+        >
+          <template v-slot:content>
+            <div
+              class="hot-article"
+              v-for="(item, index) in newArticleListData"
+              :key="item.id"
+              v-gotoArticle="item.id"
+            >
+              <i>{{index + 1}}</i>
+              <span>{{item.title}}</span>
+            </div>
+          </template>
+        </card>
       </div>
     </div>
   </div>
@@ -98,13 +114,14 @@
 <script>
 import articleList from '@/components/article/articleList'
 import card from '@/components/card/card'
-import { getArticleList, getHotArticleList } from '@/api/home'
+import { getArticleList, getHotArticleList, getNewArticleList } from '@/api/home'
 export default {
   name: 'home',
   data () {
     return {
       articleListData: [],
       hotArticleListData: [],
+      newArticleListData: [],
       page: 1,
       num: 10,
       total: 0,
@@ -116,6 +133,7 @@ export default {
   created () {
     this.getArticleList()
     this.getHotArticleList()
+    this.getNewArticleList()
   },
   computed: {
     nomore () {
@@ -147,6 +165,13 @@ export default {
           this.isLoading = false
           console.log(err)
         })
+    },
+    getNewArticleList () {
+      getNewArticleList().then(res => {
+        this.newArticleListData = res
+      }).catch(err => {
+        console.log(err)
+      })
     },
     getHotArticleList () {
       getHotArticleList().then(res => {
