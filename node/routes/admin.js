@@ -9,7 +9,8 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
-const sendEmail = require('../utils/email.js')
+const sendEmail = require('../utils/email')
+const upload = require('../utils/uploadImg.js')
 const mysqlQuery = require('../utils/index')
 const router = express.Router()
 const secret = 'mxk'
@@ -274,6 +275,7 @@ router.post('/deleteArticleComment', (req, res) => {
     })
     return
   }
+  isCheckLogin = false
   let { createTime, id } = req.body
   let sql = `delete from articleComment where createTime='${createTime}'`
   mysqlQuery(sql, (result, err) => {
@@ -307,6 +309,37 @@ router.post('/deleteArticleComment', (req, res) => {
             data: null
           })
         }
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
+router.post('/uploadImg', upload.array('img', 1), (req, res) => {
+  checkIsLogin(req)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  isCheckLogin = false
+  console.log(req.files)
+  let sql = `insert into imgList (imgUrl) values ('${req.files[0].path}')`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: req.files[0].path
       })
     } else {
       console.log(err)

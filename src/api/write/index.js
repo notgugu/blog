@@ -10,3 +10,7 @@ import http from '@/utils/request'
 export function addArticle (data) {
   return http.post('/admin/addArticle', data)
 }
+
+export function uploadImg (data) {
+  return http.filePost('/admin/uploadImg', data)
+}

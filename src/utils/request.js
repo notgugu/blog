@@ -49,4 +49,12 @@ const post = (url, data) => {
     data
   })
 }
-export default {get, post}
+const filePost = (url, data) => {
+  return axios({
+    method: 'post',
+    url,
+    'Content-Type': 'multipart/form-data',
+    data
+  })
+}
+export default {get, post, filePost}

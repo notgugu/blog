@@ -34,7 +34,7 @@
 import E from 'wangeditor'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/vs.css'
-import { addArticle } from '@/api/write'
+import { addArticle, uploadImg } from '@/api/write'
 export default {
   name: 'write',
   data () {
@@ -86,6 +86,21 @@ export default {
   mounted () {
     this.editor = new E('.editor')
     this.editor.highlight = hljs
+    this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
+      // resultFiles 是 input 中选中的文件列表
+      // insertImgFn 是获取图片 url 后，插入到编辑器的方法
+
+      // 上传图片，返回结果，将图片插入到编辑器中
+      console.log(resultFiles)
+      let formData = new FormData()
+      formData.append('name', resultFiles[0].name)
+      formData.append('img', resultFiles[0])
+      uploadImg(formData).then(res => {
+        insertImgFn(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
     this.editor.create()
   }
 }
