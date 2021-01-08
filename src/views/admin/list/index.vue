@@ -33,9 +33,17 @@ export default {
   created () {
     this.getArticleList()
   },
+  watch: {
+    isDeleteArticle (newval) {
+      this.getArticleList()
+    }
+  },
   computed: {
     nomore () {
       return this.articleListData.length >= this.total
+    },
+    isDeleteArticle () {
+      return this.$store.getters.isDeleteArticle
     }
   },
   components: {
@@ -43,8 +51,8 @@ export default {
   },
   methods: {
     loading () {
-      this.page++
       if (!this.isLoading) {
+        this.page++
         this.getArticleList()
       }
     },
@@ -56,8 +64,19 @@ export default {
       }
       getArticleList(params)
         .then(res => {
-          this.articleListData = this.articleListData.concat(res.data)
+          let object = {}
+          let open = res.data
+          console.log(open)
+          this.articleListData = open.reduce((cur, next) => {
+            console.log()
+            if (!object[next.id]) {
+              object[next.id] = true
+              cur.push(next)
+            }
+            return cur
+          }, [])
           this.total = res.total
+          console.log(this.articleListData.length, this.total = res.total, this.nomore)
           this.isLoading = false
         })
         .catch(err => {

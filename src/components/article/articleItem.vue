@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { deleteArticle } from '@/api/production'
 export default {
   name: 'articleItem',
   data () {
@@ -57,7 +58,22 @@ export default {
     }
   },
   methods: {
-    deleteArticle () {},
+    deleteArticle () {
+      let id = this.article.id
+      deleteArticle({id}).then(res => {
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+        this.$store.commit('setDeleteArticleState')
+      }).catch(err => {
+        console.log(err)
+        this.$message({
+          type: 'error',
+          message: '删除失败！'
+        })
+      })
+    },
     gotoPutArticle () {
       let id = this.article.id
       this.$router.push('/admin/put/' + id)

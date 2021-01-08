@@ -1,16 +1,8 @@
-/*
- * @Description: ...
- * @Version: 1.0
- * @Author: mxk
- * @Date: 2020-12-31 08:56:16
- * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-06 16:41:41
- */
 import axios from 'axios'
 import storage from './storage'
 import router from '../router'
 import { MessageBox } from 'element-ui'
-axios.defaults.baseURL = 'http://42.192.227.3:3000'
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://42.192.227.3:3000'
 axios.interceptors.request.use((config) => {
   let token = storage.getSessionStorage('token') || ''
   if (token) {

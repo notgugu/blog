@@ -63,9 +63,11 @@ export default {
         id
       }).then(res => {
         console.log(res)
-        this.commentListData.data = res.data.reverse()
-        this.commentListData.total = res.data.length
-        console.log(this.commentListData)
+        if (res.data) {
+          this.commentListData.data = res.data.reverse()
+          this.commentListData.total = res.data.length
+          console.log(this.commentListData)
+        }
       }).catch(err => {
         console.log(err)
       })

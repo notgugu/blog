@@ -23,6 +23,14 @@ export function addArticleComment (data) {
   return http.post('/comment/addArticleComment', data)
 }
 
+export function reviewArticleComment (data) {
+  return http.post('/admin/reviewArticleComment', data)
+}
+
 export function deleteArticleComment (data) {
   return http.post('/admin/deleteArticleComment', data)
+}
+
+export function deleteArticle (data) {
+  return http.post('/admin/deleteArticle', data)
 }

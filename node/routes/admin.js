@@ -231,6 +231,39 @@ router.post('/deleteComment', (req, res) => {
   })
 })
 
+router.post('/reviewArticleComment', (req, res) => {
+  checkIsLogin(req)
+  if (!isCheckLogin) {
+    res.json({
+      code: 403,
+      msg: '该功能仅登录后可使用',
+      data: null
+    })
+    return
+  }
+  isCheckLogin = false
+  let { id, review, email, createTime } = req.body
+  let reviewTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+  let sql = `update articleComment set review='${review}',reviewTime='${reviewTime}' where id=${id}, createTime='${createTime}'`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      sendEmail(email)
+      res.json({
+        code: 200,
+        msg: 'success',
+        data: null
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: err,
+        data: null
+      })
+    }
+  })
+})
+
 router.post('/deleteArticleComment', (req, res) => {
   checkIsLogin(req)
   if (!isCheckLogin) {

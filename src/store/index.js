@@ -14,7 +14,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     isOnLogin: false,
-    isUpdateComment: 0
+    isUpdateComment: 0,
+    isDeleteArticle: 0
   },
   getters: {
     isOnLogin (state) {
@@ -22,6 +23,9 @@ const store = new Vuex.Store({
     },
     isUpdateComment (state) {
       return state.isUpdateComment
+    },
+    isDeleteArticle (state) {
+      return state.isDeleteArticle
     }
   },
   mutations: {
@@ -30,6 +34,9 @@ const store = new Vuex.Store({
     },
     setUpdateState (state) {
       state.isUpdateComment++
+    },
+    setDeleteArticleState (state) {
+      state.isDeleteArticle++
     }
   },
   actions: {}

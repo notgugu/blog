@@ -35,7 +35,7 @@ export default {
     },
     nomore: {
       type: Boolean,
-      default: true
+      default: false
     },
     isLoading: {
       type: Boolean,
@@ -47,7 +47,7 @@ export default {
       const clientHeight = document.documentElement.clientHeight
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
-      if (clientHeight + scrollTop >= scrollHeight - 100) {
+      if (clientHeight + scrollTop >= scrollHeight - 100 && !this.nomore) {
         // 当列表拉到离底部100时 通知父组件执行loading事件
         this.$emit('loading')
       }
@@ -72,6 +72,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .bottom {
+  margin: 30px;
   line-height: 50px;
   text-align: center;
   font-size: 18px;

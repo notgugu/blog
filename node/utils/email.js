@@ -21,7 +21,7 @@ function sendEmail (to) {
     from: '"凡" <534957983@qq.com>',
     to,
     subject: 'hello',
-    text: '你好啊,感谢您的留言,已回复'
+    text: '您好,感谢您的留言,您于本博客的留言已被回复，请注意查收。'
   }
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {

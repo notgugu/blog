@@ -28,7 +28,7 @@
 
 <script>
 import { reviewComment, deleteComment } from '@/api/message'
-import { deleteArticleComment } from '@/api/production'
+import { deleteArticleComment, reviewArticleComment } from '@/api/production'
 export default {
   name: 'commentItem',
   data () {
@@ -45,6 +45,23 @@ export default {
     }
   },
   methods: {
+    reviewArticleComment () {
+      let id = this.id
+      let createTime = this.content.createTime
+      reviewArticleComment({id, createTime}.then(res => {
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+        this.$store.commit('setUpdateState')
+      })).catch(err => {
+        console.log(err)
+        this.$message({
+          type: 'error',
+          message: '删除失败'
+        })
+      })
+    },
     deleteArticleComment () {
       let createTime = this.content.createTime
       let id = this.id
@@ -102,23 +119,27 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       }).then(({ value }) => {
-        reviewComment({
-          id,
-          review: value,
-          email
-        }).then(res => {
-          this.$message({
-            type: 'success',
-            message: '回复成功'
+        if (this.isInArticle) {
+          this.reviewArticleComment()
+        } else {
+          reviewComment({
+            id,
+            review: value,
+            email
+          }).then(res => {
+            this.$message({
+              type: 'success',
+              message: '回复成功'
+            })
+            this.$store.commit('setUpdateState')
+          }).catch(err => {
+            console.log(err)
+            this.$message({
+              type: 'error',
+              message: '回复失败'
+            })
           })
-          this.$store.commit('setUpdateState')
-        }).catch(err => {
-          console.log(err)
-          this.$message({
-            type: 'error',
-            message: '回复失败'
-          })
-        })
+        }
       }).catch(() => {
         this.$message({
           type: 'info',
