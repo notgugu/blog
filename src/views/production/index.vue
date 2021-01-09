@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 14:08:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-09 14:14:46
+ * @LastEditTime: 2021-01-09 15:01:43
 -->
 <template>
   <div class="article">
@@ -62,11 +62,11 @@ export default {
       getArticleComment({
         id
       }).then(res => {
-        console.log(res)
         if (res.data) {
           this.commentListData.data = res.data.reverse()
           this.commentListData.total = res.data.length
-          console.log(this.commentListData)
+        } else {
+          this.commentListData.data = []
         }
       }).catch(err => {
         console.log(err)
