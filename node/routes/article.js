@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:22:40
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-06 13:40:07
+ * @LastEditTime: 2021-01-09 14:33:03
  */
 const express = require('express')
 const mysqlQuery = require('../utils/index')
@@ -175,6 +175,124 @@ router.post('/addReadCount', (req, res) => {
       msg: err,
       data: null
     })
+  })
+})
+
+router.get('/getAllCategory', (req, res) => {
+  let sql = `select category from articleList`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      let data = result
+      res.json({
+        code: 200,
+        msg: 'success',
+        data
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: 'failed',
+        data: null
+      })
+    }
+  })
+})
+
+router.get('/getArticleListByCategory', (req, res) => {
+  let category = req.query.category
+  let sql1
+  if (category) {
+    sql1 = `select * from articleList where category='${category}'`
+  } else {
+    sql1 = `select * from articleList`
+  }
+  mysqlQuery(sql1, (result, err) => {
+    if (result) {
+      let data = result.map(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          author: item.author,
+          createTime: item.createTime,
+          category: item.category,
+          introduce: item.introduce,
+          readCount: item.readCount,
+          messageCount: item.messageCount,
+          tags: item.tags && item.tags.split(',')
+        }
+      })
+      res.json({
+        code: 200,
+        msg: 'success',
+        data
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: 'failed',
+        data: null
+      })
+    }
+  })
+})
+
+router.get('/getAllDate', (req, res) => {
+  let sql = `select createTime from articleList`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      let data = result.map(item => {
+        return item.createTime.slice(0, 7)
+      })
+      res.json({
+        code: 200,
+        msg: 'success',
+        data
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: 'failed',
+        data: null
+      })
+    }
+  })
+})
+
+router.get('/getArticleListByCreateTime', (req, res) => {
+  let createTime = req.query.createTime || '-'
+  let sql = `select * from articleList`
+  mysqlQuery(sql, (result, err) => {
+    if (result) {
+      let data = result.filter(item => item.createTime.indexOf(createTime) !== -1)
+      data = data.map(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          author: item.author,
+          createTime: item.createTime,
+          category: item.category,
+          introduce: item.introduce,
+          readCount: item.readCount,
+          messageCount: item.messageCount,
+          tags: item.tags && item.tags.split(',')
+        }
+      })
+      res.json({
+        code: 200,
+        msg: 'success',
+        data
+      })
+    } else {
+      console.log(err)
+      res.json({
+        code: 400,
+        msg: 'failed',
+        data: null
+      })
+    }
   })
 })
 

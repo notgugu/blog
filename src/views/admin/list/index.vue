@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2021-01-03 19:04:33
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-03 19:18:04
+ * @LastEditTime: 2021-01-08 21:15:56
 -->
 <template>
   <div class="list">
@@ -66,9 +66,7 @@ export default {
         .then(res => {
           let object = {}
           let open = res.data
-          console.log(open)
           this.articleListData = open.reduce((cur, next) => {
-            console.log()
             if (!object[next.id]) {
               object[next.id] = true
               cur.push(next)
@@ -76,7 +74,6 @@ export default {
             return cur
           }, [])
           this.total = res.total
-          console.log(this.articleListData.length, this.total = res.total, this.nomore)
           this.isLoading = false
         })
         .catch(err => {

@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 17:26:34
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-07 08:54:31
+ * @LastEditTime: 2021-01-09 14:37:21
 -->
 <template>
   <div class="mine">
@@ -43,6 +43,17 @@
             <p>
               <span>网站简介：</span>gitHub开源地址为：https://github.com/notgugu/blog；本站的主要栏目有文章，分类，在线留言，我的等
             </p>
+          </div>
+        </div>
+      </template>
+    </card>
+    <card :title="'更新计划'">
+      <template v-slot:content>
+        <div class="content">
+          <div>
+            <p><span>1：</span>实现移动端适配</p>
+            <p><span>2：</span>前端代码由vue2重构为vue3</p>
+            <p><span>3：</span>服务器渲染（Vue Ssr）- 待定</p>
           </div>
         </div>
       </template>

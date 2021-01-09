@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-29 14:50:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-07 13:16:42
+ * @LastEditTime: 2021-01-08 21:56:10
 -->
 <template>
   <div class="list">
@@ -35,7 +35,7 @@ export default {
     },
     nomore: {
       type: Boolean,
-      default: false
+      default: true
     },
     isLoading: {
       type: Boolean,

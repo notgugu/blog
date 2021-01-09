@@ -4,7 +4,7 @@
  * @Author: mxk
  * @Date: 2020-12-31 14:08:16
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-07 13:30:00
+ * @LastEditTime: 2021-01-09 14:14:46
 -->
 <template>
   <div class="article">
@@ -104,6 +104,6 @@ export default {
 </style>
 <style scoped lang='less'>
 /deep/.hljs {
-  background-color: #ddd;
+  background-color: #eee;
 }
 </style>
