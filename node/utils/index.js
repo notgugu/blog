@@ -4,14 +4,15 @@
  * @Author: mxk
  * @Date: 2021-01-04 09:29:08
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-01-06 13:18:41
+ * @LastEditTime: 2021-01-10 10:46:23
  */
 const mysql = require('mysql')
 let pool = mysql.createPool({
   host: '42.192.227.3',
   user: 'root',
   password: '123456',
-  database: 'blog'
+  database: 'blog',
+  charset: 'UTF8MB4_GENERAL_CI'
 })
 
 function mysqlQuery (sql, callback) {
