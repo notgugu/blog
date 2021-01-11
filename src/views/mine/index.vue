@@ -51,9 +51,10 @@
       <template v-slot:content>
         <div class="content">
           <div>
-            <p><span>1：</span>实现移动端适配</p>
-            <p><span>2：</span>前端代码由vue2重构为vue3</p>
-            <p><span>3：</span>服务器渲染（Vue Ssr）- 待定</p>
+            <p><span>1：</span>实现自动化部署</p>
+            <p><span>2：</span>实现移动端适配</p>
+            <p><span>3：</span>前端代码由vue2重构为vue3</p>
+            <p><span>4：</span>服务器渲染（Vue Ssr）- 待定</p>
           </div>
         </div>
       </template>
