@@ -13,7 +13,7 @@ conn.on('ready', () => {
       stream.on('close', (code, signal) => {
         spinner.start()
         scpClient.scp('./dist', {
-          host: '42.192.227.3',
+          host: '119.29.174.166',
           port: '22',
           username: 'root',
           password: password.password,
@@ -33,7 +33,7 @@ conn.on('ready', () => {
   })
 })
 conn.connect({
-  host: '42.192.227.3',
+  host: '119.29.174.166',
   port: '22',
   username: 'root',
   password: password.password

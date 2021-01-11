@@ -8,7 +8,7 @@
  */
 const mysql = require('mysql')
 let pool = mysql.createPool({
-  host: '42.192.227.3',
+  host: '119.29.174.166',
   user: 'root',
   password: '123456',
   database: 'blog',
