@@ -333,7 +333,7 @@ router.post('/uploadImg', upload.array('img', 1), (req, res) => {
   }
   isCheckLogin = false
   console.log(req.files)
-  let imgUrl = `http://42.192.227.3/uploadImg/${req.files[0].filename}`
+  let imgUrl = `http://119.29.174.166/uploadImg/${req.files[0].filename}`
   let sql = `insert into imgList (imgUrl) values ('${imgUrl}')`
   mysqlQuery(sql, (result, err) => {
     if (result) {

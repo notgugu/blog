@@ -16,9 +16,9 @@ let createFolder = (folder) => {
     fs.mkdirSync(folder)
   }
 }
-let uploadFolder = path.resolve(__dirname, '../uploadImg')
-// 服务器目录 本地运行会报错
-// let uploadFolder = path.resolve(__dirname, '../../nginx/dist/uploadImg')
+// let uploadFolder = path.resolve(__dirname, '../uploadImg')
+// 我的服务器图片目录 本地运行会报错
+let uploadFolder = path.resolve(__dirname, '../../nginx/dist/uploadImg')
 createFolder(uploadFolder)
 let storage = multer.diskStorage({
   destination (req, file, cb) {

@@ -104,6 +104,7 @@ export default {
 </style>
 <style scoped lang='less'>
 /deep/code {
+  display: block;
   padding: 8px 0;
   background-color: #eee;
 }
