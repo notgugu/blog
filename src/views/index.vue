@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <div style="height: 100px"></div>
     <div class="main-content">
       <keep-alive>
         <router-view v-if="this.$route.meta.isKeepAlive"/>
@@ -108,18 +109,4 @@ export default {
 
 <style lang="less">
 @import '../assets/css/index.less';
-.records {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  background-color: #fff;
-  border-top: 1px solid #EEE;
-  height: 50px;
-  line-height: 50px;
-  a:hover {
-    color:cadetblue;
-  }
-}
 </style>

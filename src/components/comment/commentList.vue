@@ -151,7 +151,7 @@ export default {
 
 <style scoped lang="less">
 .commentList {
-  margin-top: 30px;
+  margin: 30px 0 80px 0;
   .comment-header {
     i {
       color: red;

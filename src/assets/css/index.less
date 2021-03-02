@@ -1,5 +1,6 @@
 .main {
-  height: 100%;
+  position: relative;
+  min-height: 100%;
   .main-header{
     position: fixed;
     left: 0;
@@ -53,8 +54,23 @@
     }
   }
   .main-content {
-    margin: 60px auto 0 auto;
+    margin: 0 auto;
     width: 70%;
     height: auto;
+  }
+  .records {
+    position: relative;
+    bottom: -20px;
+    right: 0;
+    left: 0;
+    z-index: 99999;
+    text-align: center;
+    background-color: #fff;
+    border-top: 1px solid #EEE;
+    height: 50px;
+    line-height: 50px;
+    a:hover {
+      color:cadetblue;
+    }
   }
 }
