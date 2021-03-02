@@ -59,18 +59,24 @@ export default {
   },
   methods: {
     deleteArticle () {
-      let id = this.article.id
-      deleteArticle({id}).then(res => {
-        this.$message({
-          type: 'success',
-          message: '删除成功'
-        })
-        this.$store.commit('setDeleteArticleState')
-      }).catch(err => {
-        console.log(err)
-        this.$message({
-          type: 'error',
-          message: '删除失败！'
+      this.$confirm('此举会彻底删除该文章，是否继续？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let id = this.article.id
+        deleteArticle({id}).then(res => {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          this.$store.commit('setDeleteArticleState')
+        }).catch(err => {
+          console.log(err)
+          this.$message({
+            type: 'error',
+            message: '删除失败！'
+          })
         })
       })
     },
