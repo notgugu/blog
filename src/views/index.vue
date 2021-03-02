@@ -35,6 +35,7 @@
       <router-view v-if="!this.$route.meta.isKeepAlive"/>
     </div>
     <go-top></go-top>
+    <div class="records"><a href="http://beian.miit.gov.cn" target="_blank">浙ICP备2021002524号</a></div>
   </div>
 </template>
 
@@ -107,4 +108,18 @@ export default {
 
 <style lang="less">
 @import '../assets/css/index.less';
+.records {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  background-color: #fff;
+  border-top: 1px solid #EEE;
+  height: 50px;
+  line-height: 50px;
+  a:hover {
+    color:cadetblue;
+  }
+}
 </style>

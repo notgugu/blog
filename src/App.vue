@@ -9,7 +9,6 @@
 <template>
   <div id="app">
     <router-view/>
-    <div class="records"><a href="http://beian.miit.gov.cn" target="_blank">浙ICP备2021002524号</a></div>
   </div>
 </template>
 
@@ -46,15 +45,4 @@ export default {
 
 <style lang="less">
 @import './assets/css/base.less';
-.records {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  text-align: center;
-  height: 50px;
-  a {
-    color: #000;
-  }
-}
 </style>
