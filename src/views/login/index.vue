@@ -15,7 +15,7 @@
         <div class="item"><span>密码:</span><el-input v-model="password" type="password"/></div>
       </div>
       <div class="btn">
-        <el-button type="primary" @click="login">登陆</el-button>
+        <el-button type="primary" @click.enter="login">登陆</el-button>
         <el-button @click="back">返回博客</el-button>
       </div>
     </div>

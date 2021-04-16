@@ -15,14 +15,14 @@
     </div>
     <div class="putMsg">
       <div>
-        <label><span>*</span>标题<input v-model="articleData.title" type="text"></label>
-        <label><span>*</span>作者<input v-model="articleData.author" type="text"></label>
+        <label><span>*</span>标题<el-input v-model="articleData.title" type="text"></el-input></label>
+        <label><span>*</span>作者<el-input v-model="articleData.author" type="text"></el-input></label>
       </div>
       <div>
-        <label><span>*</span>分类<input v-model="articleData.category" type="text"></label>
-        <label><span>*</span>标签<input v-model="articleData.tags" type="text"></label>
+        <label><span>*</span>分类<el-input v-model="articleData.category" type="text"></el-input></label>
+        <label><span>*</span>标签<el-input v-model="articleData.tags" type="text"></el-input></label>
       </div>
-      <label><span>*</span>简介<input v-model="articleData.introduce" class="introduce" type="text"></label>
+      <label><span>*</span>简介<el-input v-model="articleData.introduce" class="introduce" type="textarea"></el-input></label>
     </div>
     <div class="button">
       <el-button type="primary" @click="getDetail">提交</el-button>
@@ -154,6 +154,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
+    padding-bottom: 30px;
   }
 }
 </style>

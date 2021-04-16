@@ -36,8 +36,8 @@
       <template v-slot:content>
         <div class="content">
           <div>
-            <p><span>博客网址：</span>暂无</p>
-            <p><span>上线时间：</span>未定</p>
+            <p><span>博客网址：</span>www.maxiankuai.com</p>
+            <p><span>上线时间：</span>已上线</p>
             <p><span>前端部分：</span>vue.js + element-ui</p>
             <p><span>后端部分：</span>node.js + mysql</p>
             <p>

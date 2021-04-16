@@ -15,14 +15,14 @@
     </div>
     <div class="writeMsg">
       <div>
-        <label><span>*</span>标题<input v-model="title" type="text"></label>
-        <label><span>*</span>作者<input v-model="author" type="text"></label>
+        <label><span>*</span>标题<el-input v-model="title" type="text"></el-input></label>
+        <label><span>*</span>作者<el-input v-model="author" type="text"></el-input></label>
       </div>
       <div>
-        <label><span>*</span>分类<input v-model="category" type="text"></label>
-        <label><span>*</span>标签<input v-model="tags" type="text"></label>
+        <label><span>*</span>分类<el-input v-model="category" type="text"></el-input></label>
+        <label><span>*</span>标签<el-input v-model="tags" type="text"></el-input></label>
       </div>
-      <label><span>*</span>简介<input v-model="introduce" class="introduce" type="text"></label>
+      <label><span>*</span>简介<el-input v-model="introduce" class="introduce" type="text"></el-input></label>
     </div>
     <div class="button">
       <el-button type="primary" @click="getDetail">提交</el-button>
