@@ -43,7 +43,7 @@ export default {
   methods: {
     getAllDate () {
       getAllDate().then(res => {
-        this.tabData = [...new Set(res)]
+        this.tabData = [...new Set(res)].reverse()
       }).catch(err => {
         console.log(err)
       })
